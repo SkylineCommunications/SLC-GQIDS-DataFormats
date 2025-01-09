@@ -36,7 +36,7 @@ id: 0d9b64f3-81d0-46e6-bd3f-5fced5339103
 #   Max length: 100 characters.
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
-title: DataFormats-Csv
+title: SLC-GQIDS-DataFormats-Csv
 # [Optional]
 # General information about the Catalog item.
 #   Max length: 100,000 characters
@@ -58,11 +58,15 @@ documentation_url:
 # Format: 'name <email> (url)'
 #   The name is required; max 256 characters.
 #   The email and url are optional, and should be in valid email/URL formats.
-owners: []
+owners: 
+  - name: Carlos Matheus
+    email: carlos.matheus@akyline.be
 # [Optional]
 # Tags that allow you to categorize your Catalog items.
 #   Max number of tags: 5
 #   Max length: 50 characters.
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
-tags: []
+tags: 
+  - Data Format
+  - CSV
