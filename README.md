@@ -9,7 +9,11 @@ If the specified path does not exist, the GQI automatically creates it, allowing
 
 ## Delimiter smart detection
   
-If no delimiter is provided, the GQI will detect the most common delimiter character in the header (first line) of the CSV file. The smart detection feature is capable of identifying delimiters only from the following set: `,`, `;`, `\t`, and `|`.
+If no delimiter is provided, the GQI will detect the most common delimiter character in the header (first line) of the CSV file. The smart detection feature is capable of identifying delimiters only from the following set
+- `,`
+- `;`
+- `\t`
+- `|`
 
 ## Header capitalization
 
