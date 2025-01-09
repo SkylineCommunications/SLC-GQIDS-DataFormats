@@ -26,7 +26,7 @@ jobs:
       sonarCloudProjectName: SkylineCommunications_SLC-GQIDS-DataFormats-Csv
     secrets:
       # The API-key: generated in the DCP Admin app (https://admin.dataminer.services/) as authentication for a certain DataMiner System.
-      api-key: ${{ secrets.FLAMINGOS_DEPLOY_KEY }}
+      api-key: ${{ secrets.DATAMINER_DEPLOY_KEY }}
       sonarCloudToken: ${{ secrets.SONAR_TOKEN }}
     
    # Optional 0 or More CD Jobs as needed
@@ -46,6 +46,6 @@ jobs:
            # Stage deploy
            stage: Deploy
            # The API-key: generated in the DCP Admin app (https://admin.dataminer.services/) as authentication for a certain DataMiner System.
-           api-key: ${{ secrets.FLAMINGOS_DEPLOY_KEY }}
+           api-key: ${{ secrets.DATAMINER_DEPLOY_KEY }}
            # Id of the uploaded artifact
            artifact-id: ${{ needs.CI.outputs.artifact-id }}
