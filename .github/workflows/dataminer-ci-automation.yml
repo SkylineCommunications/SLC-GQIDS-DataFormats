@@ -1,4 +1,4 @@
-name: DataMiner CI Automation
+name: DataMiner CICD Automation
 
 # Controls when the workflow will run
 on:
@@ -29,19 +29,23 @@ jobs:
       api-key: ${{ secrets.FLAMINGOS_DEPLOY_KEY }}
       sonarCloudToken: ${{ secrets.SONAR_TOKEN }}
     
-  # # Optional 0 or More CD Jobs as needed
-  # CD:
-  #   if: github.ref_type == 'tag'
-  #   environment: production
-  #   name: CD
-  #   runs-on: ubuntu-latest
-  #   needs: CI
+   # Optional 0 or More CD Jobs as needed
+  CD:
+     if: github.ref_type == 'tag'
+     environment: production
+     name: CD
+     runs-on: ubuntu-latest
+     needs: CI
 
-  #   steps:
-  #     - uses: actions/checkout@v4
-        
-  #     - name: Install .NET Tools
-  #       run: dotnet tool install -g Skyline.DataMiner.CICD.Tools.DataMinerDeploy
+     steps:
+       - uses: actions/checkout@v4
 
-  #     - name: Deploy to DataMiner
-  #       run: dataminer-package-deploy from-catalog --artifact-id "${{ needs.CI.outputs.artifact-id }}" --dm-catalog-token ${{ secrets.DATAMINER_DEPLOY_KEY }}
+       - name: Skyline DataMiner Deploy Action
+         uses: SkylineCommunications/Skyline-DataMiner-Deploy-Action@v1
+         with:
+           # Stage deploy
+           stage: Deploy
+           # The API-key: generated in the DCP Admin app (https://admin.dataminer.services/) as authentication for a certain DataMiner System.
+           api-key: ${{ secrets.FLAMINGOS_DEPLOY_KEY }}
+           # Id of the uploaded artifact
+           artifact-id: ${{ needs.CI.outputs.artifact-id }}
