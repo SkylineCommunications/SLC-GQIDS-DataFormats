@@ -2,7 +2,6 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Globalization;
     using System.IO;
     using System.Linq;
@@ -11,8 +10,9 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
     using CsvHelper.Configuration;
     using CsvHelper.TypeConversion;
 
+    using GQIHelper.HeaderInfo;
+
     using Skyline.DataMiner.Analytics.GenericInterface;
-    using Skyline.DataMiner.Net.Messages.SLDataGateway;
     using Skyline.DataMiner.Utils.SecureCoding.SecureIO;
 
     [GQIMetaData(Name = "CSV File")]
@@ -34,8 +34,6 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
         private string _delimiter;
         private string _headerCapitalization;
         private string _csvFilePath;
-
-
         private HeaderInfo _headerInfo;
         private GQIRow[] _rows;
         private int _rowCount;
@@ -85,11 +83,42 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
             return new OnArgumentsProcessedOutputArgs();
         }
 
+        public GQIColumn[] GetColumns()
+        {
+            return _headerInfo.Columns;
+        }
+
+        public GQIPage GetNextPage(GetNextPageInputArgs args)
+        {
+            return new GQIPage(_rows);
+        }
+
+        public void OnStartUpdates(IGQIUpdater updater)
+        {
+            _updater = updater;
+
+            var directory = Path.GetDirectoryName(_csvFilePath);
+            var fileName = Path.GetFileName(_csvFilePath);
+            _watcher = new FileSystemWatcher(directory, fileName) { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime, EnableRaisingEvents = true };
+
+            _watcher.Changed += OnChanged;
+        }
+
+        public void OnStopUpdates()
+        {
+            if (_watcher is null)
+                return;
+
+            _watcher.Changed -= OnChanged;
+            _watcher.Dispose();
+            _updater = null;
+        }
+
         private void ReadCSVFile()
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                Delimiter = DetectDelimiter(_csvFilePath),
+                Delimiter = DetectDelimiter(),
             };
 
             using (var fileStream = new FileStream(_csvFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
@@ -98,13 +127,13 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
             {
                 csvReader.Read();
                 csvReader.ReadHeader();
-                _headerInfo = GetHeaderInfo(csvReader.HeaderRecord);
+                _headerInfo = HeaderInfo.GetHeaderInfo(csvReader.HeaderRecord, _headerCapitalization);
                 _rows = ReadRows(csvReader);
                 _rowCount = _rows.Length;
             }
         }
 
-        private string DetectDelimiter(string filePath)
+        private string DetectDelimiter()
         {
             if (!String.IsNullOrEmpty(_delimiter))
             {
@@ -113,7 +142,7 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 
             Dictionary<string, int> delimiterCounts = new Dictionary<string, int>();
 
-            using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+            using (var fileStream = new FileStream(_csvFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
             using (var streamReader = new StreamReader(fileStream))
             {
                 string headerLine = streamReader.ReadLine();
@@ -132,74 +161,6 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 
                 throw new GenIfException($"No Delimiter detected, please specify a delimiter.");
             }
-        }
-
-        private GQIColumn GetColumn(string name, string type)
-        {
-            var headerCapitalizedName = GetHeaderCapitalization(name);
-
-            switch (type)
-            {
-                case "bool": return new GQIBooleanColumn(headerCapitalizedName);
-                case "datetime": return new GQIDateTimeColumn(headerCapitalizedName);
-                case "double": return new GQIDoubleColumn(headerCapitalizedName);
-                case "int": return new GQIIntColumn(headerCapitalizedName);
-                default: return new GQIStringColumn(headerCapitalizedName);
-            }
-        }
-
-        private string GetHeaderCapitalization(string headerName)
-        {
-            switch (_headerCapitalization)
-            {
-                case "Uppercase":
-                    return headerName.ToUpper();
-
-                case "Lowercase":
-                    return headerName.ToLower();
-
-                case "Titlecase":
-                    TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
-                    return textInfo.ToTitleCase(headerName.ToLower());
-
-                case "Original":
-                default:
-                    return headerName;
-            }
-        }
-
-        private HeaderInfo GetHeaderInfo(string[] header)
-        {
-            var keyIndex = -1;
-            var columns = new List<GQIColumn>();
-
-            for (int i = 0; i < header.Length; i++)
-            {
-                var columnInfo = GetColumnInfo(header[i]);
-
-                if (columnInfo.type == "key")
-                {
-                    if (keyIndex != -1)
-                        throw new GenIfException($"Duplicate key definition at column {keyIndex} and column {i}.");
-                    keyIndex = i;
-                }
-
-                var column = GetColumn(columnInfo.name, columnInfo.type);
-                columns.Add(column);
-            }
-
-            return new HeaderInfo(keyIndex, columns.ToArray());
-        }
-
-        private (string name, string type) GetColumnInfo(string head)
-        {
-            var separatorIndex = head.IndexOf("::");
-            if (separatorIndex == -1)
-                return (head, "string");
-
-            var name = head.Substring(0, separatorIndex);
-            var type = head.Substring(separatorIndex + 2);
-            return (name, type);
         }
 
         private GQIRow[] ReadRows(CsvReader csvReader)
@@ -245,28 +206,18 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
             return new GQICell() { Value = value };
         }
 
-        public GQIColumn[] GetColumns()
-        {
-            return _headerInfo.Columns;
-        }
-
-        public GQIPage GetNextPage(GetNextPageInputArgs args)
-        {
-            return new GQIPage(_rows);
-        }
-
         private void UpdateRows()
         {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                Delimiter = DetectDelimiter(_csvFilePath),
+                Delimiter = DetectDelimiter(),
             };
 
             using (var fileStream = new FileStream(_csvFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
             using (var streamReader = new StreamReader(fileStream))
             using (var csvReader = new CsvReader(streamReader, config))
             {
-                csvReader.Read(); // Skip header
+                csvReader.Read();
                 var columnTypes = _headerInfo.GetColumnTypes();
                 UpdateRows(csvReader, columnTypes);
             }
@@ -274,93 +225,55 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 
         private void UpdateRows(CsvReader reader, Type[] columnTypes)
         {
+            var updatedRows = new List<GQIRow>();
             int index = 0;
 
-            RemoveExtraRows(index);
-            // Process new or updated rows
             while (reader.Read())
             {
                 var row = ReadRow(reader, columnTypes, index);
-                _updater.AddRow(row);
 
+                var matchingRow = _rows.FirstOrDefault(x => x.Key == row.Key);
+
+                if (matchingRow != null)
+                {
+                    _updater.UpdateRow(row);
+                }
+                else
+                {
+                    _updater.AddRow(row);
+                }
+
+                updatedRows.Add(row);
                 index++;
             }
 
-            // Process deleted rows
+            RemoveExtraRows(updatedRows);
         }
 
-        private void RemoveExtraRows(int startingIndex)
+        private void RemoveExtraRows(List<GQIRow> updatedRows)
         {
-            for (int i = 0; i < _rowCount; i++)
+            var previousRowKeys = _rows.Select(x => x.Key).ToList();
+            var updatedRowsKeys = updatedRows.Select(x => x.Key).ToList();
+
+            var keysToRemove = previousRowKeys.Except(updatedRowsKeys);
+            foreach (var rowKey in keysToRemove)
             {
-                _updater.RemoveRow($"{i}");
+                _updater.RemoveRow(rowKey);
             }
-        }
 
-        public void OnStartUpdates(IGQIUpdater updater)
-        {
-            _updater = updater;
-
-            var directory = Path.GetDirectoryName(_csvFilePath);
-            var fileName = Path.GetFileName(_csvFilePath);
-            _watcher = new FileSystemWatcher(directory, fileName) { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime, EnableRaisingEvents = true };
-
-            _watcher.Changed += OnChanged;
+            _rows = updatedRows.ToArray();
+            _rowCount = _rows.Length;
         }
 
         private void OnChanged(object sender, FileSystemEventArgs args)
         {
             try
             {
-                _logger.Information("OnChange detected");
-                _logger.Debug("OnChange detected");
                 UpdateRows();
             }
             catch (Exception ex)
             {
-                _logger.Information($"Failed to update rows: {ex.Message}");
                 throw new GenIfException($"Failed to update rows: {ex.Message}");
-            }
-        }
-
-        public void OnStopUpdates()
-        {
-            if (_watcher is null)
-                return;
-
-            _watcher.Changed -= OnChanged;
-            _watcher.Dispose();
-            _updater = null;
-        }
-
-
-        private class HeaderInfo
-        {
-            public int KeyIndex { get; }
-
-            public GQIColumn[] Columns { get; }
-
-            public HeaderInfo(int keyIndex, GQIColumn[] columns)
-            {
-                KeyIndex = keyIndex;
-                Columns = columns;
-            }
-
-            public Type[] GetColumnTypes()
-            {
-                return Columns.Select(column => GetColumnType(column.Type)).ToArray();
-            }
-
-            private Type GetColumnType(GQIColumnType type)
-            {
-                switch (type)
-                {
-                    case GQIColumnType.Boolean: return typeof(bool);
-                    case GQIColumnType.DateTime: return typeof(DateTime);
-                    case GQIColumnType.Double: return typeof(double);
-                    case GQIColumnType.Int: return typeof(int);
-                    default: return typeof(string);
-                }
             }
         }
 
