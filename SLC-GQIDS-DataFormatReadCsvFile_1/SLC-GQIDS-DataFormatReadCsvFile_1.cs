@@ -27,23 +27,16 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 
         private readonly DateTimeConverter _dateTimeConverter = new DateTimeConverter();
 
-        private GQIDMS _dms;
-
-        private IGQILogger _logger;
-        private string _fileName;
         private string _delimiter;
         private string _headerCapitalization;
         private string _csvFilePath;
         private HeaderInfo _headerInfo;
         private GQIRow[] _rows;
-        private int _rowCount;
         private IGQIUpdater _updater;
         private FileSystemWatcher _watcher;
 
         public OnInitOutputArgs OnInit(OnInitInputArgs args)
         {
-            _dms = args.DMS;
-            _logger = args.Logger;
             return new OnInitOutputArgs();
         }
 
@@ -63,14 +56,14 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
                 Directory.CreateDirectory(securePath);
             }
 
-            _fileName = args.GetArgumentValue(fileName);
+            var fileNameValue = args.GetArgumentValue(fileName);
 
-            if (!_fileName.Contains(".csv"))
+            if (!fileNameValue.Contains(".csv"))
             {
-                _fileName = $"{_fileName}.csv";
+                fileNameValue = $"{fileNameValue}.csv";
             }
 
-            _csvFilePath = SecurePath.ConstructSecurePath(CSV_ROOT_PATH, _fileName);
+            _csvFilePath = SecurePath.ConstructSecurePath(CSV_ROOT_PATH, fileNameValue);
 
             if (!File.Exists(_csvFilePath))
                 throw new GenIfException($"Csv file does not exist: {_csvFilePath}");
@@ -129,7 +122,6 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
                 csvReader.ReadHeader();
                 _headerInfo = HeaderInfo.GetHeaderInfo(csvReader.HeaderRecord, _headerCapitalization);
                 _rows = ReadRows(csvReader);
-                _rowCount = _rows.Length;
             }
         }
 
@@ -185,13 +177,6 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
         {
             var cells = columnTypes.Select((type, index) => GetCell(reader, index, type));
             return new GQIRow(key.ToString(), cells.ToArray());
-        }
-
-        private GQIRow ReadRow(CsvReader reader, int keyIndex, Type[] columnTypes)
-        {
-            var key = reader.GetField(keyIndex);
-            var cells = columnTypes.Select((type, index) => GetCell(reader, index, type));
-            return new GQIRow(key, cells.ToArray());
         }
 
         private GQICell GetCell(CsvReader reader, int index, Type type)
@@ -262,7 +247,6 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
             }
 
             _rows = updatedRows.ToArray();
-            _rowCount = _rows.Length;
         }
 
         private void OnChanged(object sender, FileSystemEventArgs args)
