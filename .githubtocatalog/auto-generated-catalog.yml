@@ -36,7 +36,7 @@ id: 0d9b64f3-81d0-46e6-bd3f-5fced5339103
 #   Max length: 100 characters.
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
-title: DataFormats-Csv
+title: DataFormats
 # [Optional]
 # General information about the Catalog item.
 #   Max length: 100,000 characters
@@ -46,7 +46,7 @@ short_description: No description available
 # A valid URL that points to the source code.
 #   A valid URL
 #   Max length: 2048 characters
-source_code_url: https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats-Csv
+source_code_url: https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats
 # [Optional]
 # A valid URL that points to documentation.
 #   A valid URL
