@@ -184,11 +184,11 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
             if (type == typeof(DateTime))
             {
                 var dateTime = reader.GetField<DateTime>(index, _dateTimeConverter);
-                return new GQICell() { Value = dateTime };
+                return new GQICell { Value = dateTime };
             }
 
             var value = reader.GetField(type, index);
-            return new GQICell() { Value = value };
+            return new GQICell { Value = value };
         }
 
         private void UpdateRows()

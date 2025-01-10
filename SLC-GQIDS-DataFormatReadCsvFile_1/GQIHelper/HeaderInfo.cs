@@ -9,6 +9,14 @@
 
     public class HeaderInfo
     {
+        public enum HeaderCapitalization
+        {
+            Uppercase,
+            Lowercase,
+            Titlecase,
+            Original,
+        }
+
         public HeaderInfo(int keyIndex, GQIColumn[] columns)
         {
             KeyIndex = keyIndex;
@@ -72,7 +80,15 @@
 
         private static GQIColumn GetColumn(string name, string type, string headerCapitalization)
         {
-            var headerCapitalizedName = GetHeaderCapitalization(name, headerCapitalization);
+            string headerCapitalizedName = string.Empty;
+            if (!Enum.TryParse(headerCapitalization, true, out HeaderCapitalization headerEnum))
+            {
+                headerCapitalizedName = name;
+            }
+            else
+            {
+                headerCapitalizedName = GetHeaderCapitalization(name, headerEnum);
+            }
 
             switch (type)
             {
@@ -84,21 +100,18 @@
             }
         }
 
-        private static string GetHeaderCapitalization(string headerName, string headerCapitalization)
+        private static string GetHeaderCapitalization(string headerName, HeaderCapitalization headerCapitalizationType)
         {
-            switch (headerCapitalization)
+            switch (headerCapitalizationType)
             {
-                case "Uppercase":
+                case HeaderCapitalization.Uppercase:
                     return headerName.ToUpper();
-
-                case "Lowercase":
+                case HeaderCapitalization.Lowercase:
                     return headerName.ToLower();
-
-                case "Titlecase":
+                case HeaderCapitalization.Titlecase:
                     TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
                     return textInfo.ToTitleCase(headerName.ToLower());
-
-                case "Original":
+                case HeaderCapitalization.Original:
                 default:
                     return headerName;
             }
