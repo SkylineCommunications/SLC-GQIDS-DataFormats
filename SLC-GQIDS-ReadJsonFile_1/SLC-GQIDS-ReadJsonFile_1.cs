@@ -1,18 +1,16 @@
-namespace JSONReader
+namespace JSONFile
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
-    using Newtonsoft.Json;
-
     using Skyline.DataMiner.Analytics.GenericInterface;
     using Skyline.DataMiner.Utils.SecureCoding.SecureIO;
     using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 
     [GQIMetaData(Name = "JSON File")]
-    public class JSONFile : IGQIDataSource, IGQIInputArguments, IGQIUpdateable
+    public class JsonFile : IGQIDataSource, IGQIInputArguments, IGQIUpdateable
     {
         private const string JSON_ROOT_PATH = @"C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-ReadJsonFile\";
 
@@ -99,7 +97,7 @@ namespace JSONReader
             }
         }
 
-        private static GQIColumn CreateColumn(string name, string type)
+        private GQIColumn CreateColumn(string name, string type)
         {
             switch (type.ToLower())
             {
@@ -118,7 +116,7 @@ namespace JSONReader
             }
         }
 
-        private static object ParseValue(object value, GQIColumn column)
+        private object ParseValue(object value, GQIColumn column)
         {
             switch (column.GetType().Name)
             {
