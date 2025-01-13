@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DMSScript options="272" xmlns="http://www.skyline.be/automation">
-	<Name>SLC-GQIDS-ReadJsonFile</Name>
+	<Name>SLC-GQIDS-DataFormatReadJsonFile</Name>
 	<Description></Description>
 	<Type>Automation</Type>
 	<Author>CarlosMT</Author>
