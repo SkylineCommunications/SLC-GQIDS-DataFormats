@@ -92,7 +92,7 @@ namespace JSONFile
                     });
                 }
 
-                _rows.Add(new GQIRow($"{rowKey}",cells.ToArray()));
+                _rows.Add(new GQIRow($"{rowKey}", cells.ToArray()));
                 rowKey++;
             }
         }

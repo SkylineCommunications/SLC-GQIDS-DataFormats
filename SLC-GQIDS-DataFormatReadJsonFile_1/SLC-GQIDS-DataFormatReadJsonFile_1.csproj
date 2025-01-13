@@ -17,6 +17,7 @@
     <DefineConstants>$(DefineConstants);DCFv1;DBInfo;ALARM_SQUASHING</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.5.1" />
     <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding" Version="1.0.0" />
     <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="1.0.0">
@@ -25,6 +26,8 @@
     </PackageReference>
   </ItemGroup>
   <ProjectExtensions>
-    <VisualStudio><UserProperties DisLinkedXmlFile="..\SLC-GQIDS-DataFormatReadJsonFile.xml" DisLinkId="1" DisProjectType="automationScriptProject" /></VisualStudio>
+    <VisualStudio>
+      <UserProperties DisLinkedXmlFile="..\SLC-GQIDS-DataFormatReadJsonFile.xml" DisProjectType="automationScriptProject" DisLinkId="1" />
+    </VisualStudio>
   </ProjectExtensions>
 </Project>
