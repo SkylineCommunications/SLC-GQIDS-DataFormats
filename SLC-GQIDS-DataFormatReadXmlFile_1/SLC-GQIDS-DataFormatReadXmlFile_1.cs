@@ -208,8 +208,8 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
             _updater = updater;
 
             var directory = Path.GetDirectoryName(_xmlFilePath);
-            var jsonFileName = Path.GetFileName(_xmlFilePath);
-            _watcher = new FileSystemWatcher(directory, jsonFileName) { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime, EnableRaisingEvents = true };
+            var xmlFileName = Path.GetFileName(_xmlFilePath);
+            _watcher = new FileSystemWatcher(directory, xmlFileName) { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime, EnableRaisingEvents = true };
 
             _watcher.Changed += OnChanged;
         }
