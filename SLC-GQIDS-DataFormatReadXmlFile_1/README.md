@@ -3,7 +3,7 @@
 GQI data source that can read in XML files.
 
 The file to be imported must be placed in the following path:
-`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`
+`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`
 
 If the specified path does not exist, the GQI automatically creates it, allowing users to add the XML file later.
 
@@ -49,7 +49,6 @@ The display value is a string representation of the value.
 
 ```xml
 <Data>
-    <Version>1</Version>
     <Columns>
         <Column>
             <Name>Order ID</Name>

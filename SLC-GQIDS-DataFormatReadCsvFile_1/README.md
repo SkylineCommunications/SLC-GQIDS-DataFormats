@@ -3,7 +3,7 @@
 A custom GQI data source to import values from CSV files.
 
 The file to be imported must be placed in the following path:
-`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
+`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
 
 If the specified path does not exist, the GQI automatically creates it, allowing users to add the file later. The solution also detects the delimiter when none is specified and supports adjusting the capitalization of table headers based on user-provided arguments, making it both flexible and user-friendly.
 
