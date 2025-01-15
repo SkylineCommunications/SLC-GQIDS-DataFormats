@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DMSScript options="272" xmlns="http://www.skyline.be/automation">
-	<Name>SLC-GQIDS-DataFormatReadCsvFile</Name>
+	<Name>SLC-GQIDS-DataFormatReadXmlFile</Name>
 	<Description></Description>
 	<Type>Automation</Type>
-	<Author>CMT</Author>
+	<Author>SKYLINE2\BlakeSM</Author>
 	<CheckSets>FALSE</CheckSets>
 	<Folder>DataMiner Catalog/DevOps/Ad-Hoc Data Sources</Folder>
 
@@ -18,10 +18,9 @@
 
 	<Script>
 		<Exe id="1" type="csharp">
-			<Value><![CDATA[[Project:SLC-GQIDS-DataFormatReadCsvFile_1]]]></Value>
-			<!--<Param type="debug">true</Param>-->
+			<Value><![CDATA[[Project:SLC-GQIDS-DataFormatReadXmlFile_1]]]></Value>
 			<Param type="preCompile">true</Param>
-			<Param type="libraryName">SLC-GQIDS-DataFormatReadCsvFile</Param>
+			<Param type="libraryName">SLC-GQIDS-DataFormatReadXMLFile</Param>
 			<Message></Message>
 		</Exe>
 	</Script>
