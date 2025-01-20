@@ -3,13 +3,13 @@
 GQI data source that can read in JSON files.
 
 The file to be imported must be placed in the following path:
-`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile`
+`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile`
 
 If the specified path does not exist, the GQI automatically creates it, allowing users to add the json file later.
 
 ## Structure
 
-The JSON file consists of three properties:
+The JSON file consists of two properties:
 
 * Columns
 * Rows
