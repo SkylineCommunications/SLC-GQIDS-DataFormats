@@ -58,7 +58,7 @@ documentation_url:
 # Format: 'name <email> (url)'
 #   The name is required; max 256 characters.
 #   The email and url are optional, and should be in valid email/URL formats.
-owners: []
+owners:
   - name: Carlos Matheus
     email: carlos.matheus@akyline.be
   - name: Blake Smethers
