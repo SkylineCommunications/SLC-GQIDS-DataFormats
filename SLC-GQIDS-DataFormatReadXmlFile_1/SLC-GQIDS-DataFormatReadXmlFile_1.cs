@@ -53,9 +53,11 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Xml.Linq;
+
     using Skyline.DataMiner.Analytics.GenericInterface;
     using Skyline.DataMiner.Utils.SecureCoding.SecureIO;
 
@@ -65,22 +67,33 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
         private const string XML_ROOT_PATH = @"C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-ReadXMLFile\";
 
         private readonly GQIStringArgument fileName = new GQIStringArgument("File name") { IsRequired = true };
+        private readonly GQIStringDropdownArgument headerCapitalization = new GQIStringDropdownArgument("Header capitalization", new[] { "Original", "Uppercase", "Titlecase", "Lowercase" }) { IsRequired = false, DefaultValue = "Original" };
 
+        private string _headerCapitalization;
         private List<GQIColumn> _columns = new List<GQIColumn>();
         private List<GQIRow> _rows = new List<GQIRow>();
         private string _xmlFilePath;
         private IGQIUpdater _updater;
         private FileSystemWatcher _watcher;
 
+        public enum HeaderCapitalization
+        {
+            Uppercase,
+            Lowercase,
+            Titlecase,
+            Original,
+        }
+
         public GQIArgument[] GetInputArguments()
         {
-            return new[] { fileName };
+            return new GQIArgument[] { fileName, headerCapitalization };
         }
 
         public OnArgumentsProcessedOutputArgs OnArgumentsProcessed(OnArgumentsProcessedInputArgs args)
         {
             _updater = null;
 
+            _headerCapitalization = args.GetArgumentValue(headerCapitalization);
             var securePath = SecurePath.CreateSecurePath(XML_ROOT_PATH);
             if (!Directory.Exists(securePath))
             {
@@ -162,20 +175,47 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
 
         private GQIColumn CreateColumn(string name, string type)
         {
+            string headerCapitalizedName = string.Empty;
+            if (!Enum.TryParse(_headerCapitalization, true, out HeaderCapitalization headerEnum))
+            {
+                headerCapitalizedName = name;
+            }
+            else
+            {
+                headerCapitalizedName = GetHeaderCapitalization(name, headerEnum);
+            }
+
             switch (type.ToLower())
             {
                 case "string":
-                    return new GQIStringColumn(name);
+                    return new GQIStringColumn(headerCapitalizedName);
                 case "int":
-                    return new GQIIntColumn(name);
+                    return new GQIIntColumn(headerCapitalizedName);
                 case "datetime":
-                    return new GQIDateTimeColumn(name);
+                    return new GQIDateTimeColumn(headerCapitalizedName);
                 case "double":
-                    return new GQIDoubleColumn(name);
+                    return new GQIDoubleColumn(headerCapitalizedName);
                 case "boolean":
-                    return new GQIBooleanColumn(name);
+                    return new GQIBooleanColumn(headerCapitalizedName);
                 default:
-                    return new GQIStringColumn(name);
+                    return new GQIStringColumn(headerCapitalizedName);
+            }
+        }
+
+        private static string GetHeaderCapitalization(string headerName, HeaderCapitalization headerCapitalizationType)
+        {
+            switch (headerCapitalizationType)
+            {
+                case HeaderCapitalization.Uppercase:
+                    return headerName.ToUpper();
+                case HeaderCapitalization.Lowercase:
+                    return headerName.ToLower();
+                case HeaderCapitalization.Titlecase:
+                    TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
+                    return textInfo.ToTitleCase(headerName.ToLower());
+                case HeaderCapitalization.Original:
+                default:
+                    return headerName;
             }
         }
 
