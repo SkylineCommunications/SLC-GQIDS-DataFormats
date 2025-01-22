@@ -65,6 +65,9 @@ owners:
   - email: blake.smethers@skyline.be
     name: Blake Smethers
     url: 
+  - email: sebastian.ulloa@skyline.be
+    name: Sebastian Ulloa
+    url: 
 # [Optional]
 # Tags that allow you to categorize your Catalog items.
 #   Max number of tags: 5
