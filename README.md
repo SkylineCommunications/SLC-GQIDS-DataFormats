@@ -1,6 +1,6 @@
 # SLC-GQIDS-DataFormats
 
-This repository contains various Generic Query Interface (GQI) data source scripts that allow users to import values from CSV, JSON, or XML files into Skyline DataMiner.
+this package contains three different scripts that allow users to visualize data from CSV, JSON and XML files.
 
 ## Scripts Overview
 * SLC-GQIDS-DataFormatReadCsvFile   
