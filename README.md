@@ -1,4 +1,4 @@
-# SLC-GQIDS-DataFormats
+# DataFormats
 
 this package contains three different scripts that allow users to visualize data from CSV, JSON and XML files.
 
