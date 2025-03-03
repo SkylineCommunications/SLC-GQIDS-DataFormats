@@ -16,16 +16,12 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="CsvHelper" Version="33.0.1" />
-		<PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.5.1" />
-		<PackageReference Include="Skyline.DataMiner.Utils.SecureCoding" Version="1.0.0" />
-		<PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="1.0.0">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.4.5" />
 	</ItemGroup>
 	<ProjectExtensions>
 		<VisualStudio>
 			<UserProperties DisLinkedXmlFile="..\SLC-GQIDS-DataFormatReadCsvFile.xml" DisProjectType="automationScriptProject" DisLinkId="1" />
 		</VisualStudio>
 	</ProjectExtensions>
+	<Import Project="..\GQIHelper\GQIHelper.projitems" Label="Shared" />
 </Project>
