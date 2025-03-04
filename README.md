@@ -1,75 +1,44 @@
 # DataFormats
 
-This package provides a seamless way to visualize and transform data from **CSV, JSON, and XML** files, making data integration easier and more efficient.
+## Unlock the Power of Seamless Data Transformation 🚀
+Easily convert and visualize data from **CSV, JSON, and XML** files with **DataFormats**. Whether you're an analyst, developer, or business user, this package helps you streamline your workflow and extract insights from raw data with minimal effort.
 
-## Key Features
-- **Multi-format Support**: Handles CSV, JSON, and XML data effortlessly.
-- **Smart Detection**: Automatically detects delimiters and adjusts header capitalization.
-- **Flexible Type Conversion**: Supports automatic parsing of data types.
-- **Automated Directory Creation**: Ensures files are placed in the right location.
+### Why Choose DataFormats?
+✅ **Effortless Data Processing** – Simply place your file in the right folder, and let DataFormats handle the rest. No complex setup required!  
+✅ **Smart Delimiter Detection** – Automatically identifies delimiters in CSV files, ensuring smooth data imports.  
+✅ **Flexible Type Conversion** – Supports **bool, datetime, double, int,** and **string** formats for seamless data transformation.  
+✅ **Automated Directory Creation** – Missing the required folder? No worries—DataFormats creates it for you.  
+✅ **Multi-Format Compatibility** – Works with CSV, JSON, and XML, making it the perfect all-in-one data processing solution.
 
-## Scripts Overview
-* **SLC-GQIDS-DataFormatReadCsvFile**  
-  - Library name: `CSV File`
-* **SLC-GQIDS-DataFormatReadJsonFile**
-  - Library name: `JSON File`
-* **SLC-GQIDS-DataFormatReadXmlFile**
-  - Library name: `XML File`
+## How It Works 🔥
+1️⃣ **Drop your file** in the designated directory.  
+2️⃣ **Run the corresponding script**, and DataFormats will process your data instantly.  
+3️⃣ **Visualize, analyze, and integrate** the processed data into your system.  
 
-### CSV File Processing
-A custom Ad hoc data source to import values from CSV files.
-
-**File Path:**  
+## Supported Formats 🛠
+### CSV Processing
+📂 **File Path:**  
 `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
 
-If the specified path does not exist, the Ad hoc data source automatically creates it, allowing users to add the file later. The solution detects the delimiter when none is specified and supports header capitalization adjustments based on user-provided arguments.
+🔹 **Smart Delimiter Detection** – Identifies `,` `;` `\t` `|` automatically.  
+🔹 **Header Capitalization Control** – Choose how headers should be formatted.  
+🔹 **Type Conversion** – Define column types using `::type` suffixes.  
 
-### Smart Features
-#### Delimiter Detection
-If no delimiter is provided, the Ad hoc data source detects the most common delimiter in the header from:
-- `,`
-- `;`
-- `\t`
-- `|`
-
-#### Header Capitalization
-Allows users to specify the desired header capitalization method. If no value is provided, headers retain their original format.
-
-#### Type Conversion
-Columns can be automatically parsed using suffixes like `::type`, supporting:
-- `bool`
-- `datetime`
-- `double`
-- `int`
-- `string` (default)
-
-### Example CSV Format
+🔹 **Example CSV Format:**
 ```csv
 Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 06/12/2023 01:00,Cisco CMTS,36,1081.788,false
 06/12/2023 01:21,Huawei 5600 5800,4,196.621,true
-06/12/2023 01:26,Cisco CBR8,41,1443.027,true
-06/12/2023 01:50,Arris E6000,33,989.310,false
-06/12/2023 02:08,Casa Systems,12,374.005,true
 ```
 
-### JSON File Processing
-Processes JSON files, mapping structured data into an accessible format with defined columns and rows.
-
-**File Path:**  
+### JSON Processing
+📂 **File Path:**  
 `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile`
 
-#### Column Types
-Each column in a JSON file consists of:
-- **Name**: Display name of the column.
-- **Type**: Data type, supporting:
-  - `bool`
-  - `datetime`
-  - `double`
-  - `int`
-  - `string`
+🔹 **Column-based Structure** – Define each column with `Name` and `Type`.  
+🔹 **Supports Structured JSON** for easy integration.
 
-#### JSON Structure
+🔹 **Example JSON Format:**
 ```json
 {
     "Columns": [
@@ -87,23 +56,14 @@ Each column in a JSON file consists of:
 }
 ```
 
-### XML File Processing
-Reads and processes structured XML data, ensuring consistency in column definitions and row data.
-
-**File Path:**  
+### XML Processing
+📂 **File Path:**  
 `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`
 
-#### Column Types
-Each column in an XML file consists of:
-- **Name**: Display name of the column.
-- **Type**: Data type, supporting:
-  - `bool`
-  - `datetime`
-  - `double`
-  - `int`
-  - `string`
+🔹 **Structured Data Extraction** – Define columns and rows for seamless parsing.  
+🔹 **Supports All Common Data Types** (`bool, datetime, double, int, string`).
 
-#### XML Structure
+🔹 **Example XML Format:**
 ```xml
 <Data>
     <Columns>
@@ -123,6 +83,11 @@ Each column in an XML file consists of:
     </Rows>
 </Data>
 ```
+
+## Get Started Today! 🚀
+Try **DataFormats** and experience fast, hassle-free data transformation. Whether you’re working with CSV, JSON, or XML, this package streamlines your data workflows like never before.  
+
+For **technical details**, advanced configuration, and troubleshooting, refer to the **full documentation in your repository**.
 
 ## License
 This project is licensed under the **MIT License**. See the `LICENSE.txt` file for details.
