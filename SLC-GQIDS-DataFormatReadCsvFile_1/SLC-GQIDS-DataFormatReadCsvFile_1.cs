@@ -274,7 +274,6 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
                     if (newRows != null)
                     {
                         var comparison = new GqiTableComparer(_currentRows, newRows);
-                        _logger.Information(comparison.ToString());
                         foreach (var row in comparison.RemovedRows)
                         {
                             _updater.RemoveRow(row.Key);
