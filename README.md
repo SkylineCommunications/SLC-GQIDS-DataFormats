@@ -22,7 +22,8 @@ Easily convert and visualize data from **CSV, JSON, and XML** files with **DataF
 
 🔹 **Smart Delimiter Detection** – Identifies `,` `;` `\t` `|` automatically.  
 🔹 **Header Capitalization Control** – Choose how headers should be formatted.  
-🔹 **Type Conversion** – Define column types using `::type` suffixes.  
+🔹 **Type Conversion** – Define column types using `::type` suffixes.
+🔹 **Supports All Common Data Types** (`bool, datetime, double, int, string (default)`).
 
 🔹 **Example CSV Format:**
 ```csv
@@ -37,6 +38,7 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 
 🔹 **Column-based Structure** – Define each column with `Name` and `Type`.  
 🔹 **Supports Structured JSON** for easy integration.
+🔹 **Supports All Common Data Types** (`bool, datetime, double, int, string`).
 
 🔹 **Example JSON Format:**
 ```json
@@ -83,7 +85,15 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
     </Rows>
 </Data>
 ```
-For **technical details**, advanced configuration, and troubleshooting, refer to the **full documentation in your repository**.
+
+## Get Started Today! 🚀
+Experience efficient and seamless data transformation with **DataFormats**. Designed for handling CSV, JSON, and XML files, this package optimizes your workflow by automating data processing and integration.
+
+For **technical details**, advanced configuration, and troubleshooting, refer to the **full documentation** for each script:
+
+- 📄 [CSV File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadCsvFile_1/README.md)
+- 📄 [JSON File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadJsonFile_1/README.md)
+- 📄 [XML File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadXmlFile_1/README.md)
 
 ## License
 This project is licensed under the **MIT License**. See the `LICENSE.txt` file for details.
