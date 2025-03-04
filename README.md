@@ -21,9 +21,13 @@ Easily convert and visualize data from **CSV, JSON, and XML** files with **DataF
 `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
 
 🔹 **Smart Delimiter Detection** – Identifies `,` `;` `\t` `|` automatically.  
+
 🔹 **Header Capitalization Control** – Choose how headers should be formatted.  
+
 🔹 **Type Conversion** – Define column types using `::type` suffixes.
+
 🔹 **Supports All Common Data Types** (`bool, datetime, double, int, string (default)`).
+
 
 🔹 **Example CSV Format:**
 ```csv
@@ -36,9 +40,12 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 📂 **File Path:**  
 `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile`
 
-🔹 **Column-based Structure** – Define each column with `Name` and `Type`.  
+🔹 **Column-based Structure** – Define each column with `Name` and `Type`.
+
 🔹 **Supports Structured JSON** for easy integration.
+
 🔹 **Supports All Common Data Types** (`bool, datetime, double, int, string`).
+
 
 🔹 **Example JSON Format:**
 ```json
@@ -63,7 +70,9 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`
 
 🔹 **Structured Data Extraction** – Define columns and rows for seamless parsing.  
+
 🔹 **Supports All Common Data Types** (`bool, datetime, double, int, string`).
+
 
 🔹 **Example XML Format:**
 ```xml
