@@ -58,23 +58,36 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
     using System.Linq;
     using System.Xml.Linq;
 
+    using Common.HeaderInfo;
+    using Common.RealTimeUpdates;
+
     using Skyline.DataMiner.Analytics.GenericInterface;
-    using Skyline.DataMiner.Utils.SecureCoding.SecureIO;
 
     [GQIMetaData(Name = "XML File")]
-    public class XMLFile : IGQIDataSource, IGQIInputArguments, IGQIUpdateable
+    public class XmlFile : IGQIDataSource, IGQIInputArguments, IGQIUpdateable, IGQIOnDestroy, IGQIOnPrepareFetch, IGQIOnInit
     {
-        private const string XML_ROOT_PATH = @"C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-ReadXMLFile\";
+        private const string XML_ROOT_PATH = @"C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXMLFile\";
 
         private readonly GQIStringArgument fileName = new GQIStringArgument("File name") { IsRequired = true };
-        private readonly GQIStringDropdownArgument headerCapitalization = new GQIStringDropdownArgument("Header capitalization", new[] { "Original", "Uppercase", "Titlecase", "Lowercase" }) { IsRequired = false, DefaultValue = "Original" };
+        private readonly GQIStringDropdownArgument headerCapitalization =
+        new GQIStringDropdownArgument(
+            "Header capitalization",
+            new[] {"Original","Uppercase","Titlecase","Lowercase",})
+            {
+                IsRequired = false,
+                DefaultValue = "Original",
+            };
 
+        private readonly object _lock = new object();
         private string _headerCapitalization;
         private List<GQIColumn> _columns = new List<GQIColumn>();
-        private List<GQIRow> _rows = new List<GQIRow>();
+        private List<GQIRow> _currentRows = new List<GQIRow>();
         private string _xmlFilePath;
         private IGQIUpdater _updater;
         private FileSystemWatcher _watcher;
+        private GQIPageEnumerator pageEnumerator;
+        private DateTime _lastReadTime = DateTime.MinValue;
+        private IGQILogger _logger;
 
         public enum HeaderCapitalization
         {
@@ -82,6 +95,12 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
             Lowercase,
             Titlecase,
             Original,
+        }
+
+        public OnInitOutputArgs OnInit(OnInitInputArgs args)
+        {
+            _logger = args.Logger;
+            return new OnInitOutputArgs();
         }
 
         public GQIArgument[] GetInputArguments()
@@ -94,10 +113,9 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
             _updater = null;
 
             _headerCapitalization = args.GetArgumentValue(headerCapitalization);
-            var securePath = SecurePath.CreateSecurePath(XML_ROOT_PATH);
-            if (!Directory.Exists(securePath))
+            if (!Directory.Exists(XML_ROOT_PATH))
             {
-                Directory.CreateDirectory(securePath);
+                Directory.CreateDirectory(XML_ROOT_PATH);
             }
 
             var fileNameValue = args.GetArgumentValue(fileName);
@@ -107,12 +125,12 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
                 fileNameValue = $"{fileNameValue}.xml";
             }
 
-            _xmlFilePath = SecurePath.ConstructSecurePath(XML_ROOT_PATH, fileNameValue);
+            _xmlFilePath = Path.Combine(XML_ROOT_PATH, fileNameValue);
 
             if (!File.Exists(_xmlFilePath))
                 throw new GenIfException($"XML file does not exist: {_xmlFilePath}");
 
-            LoadXmlFile();
+            _currentRows = GetNewRows();
             return new OnArgumentsProcessedOutputArgs();
         }
 
@@ -123,10 +141,117 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
 
         public GQIPage GetNextPage(GetNextPageInputArgs args)
         {
-            return new GQIPage(_rows.ToArray()) { HasNextPage = false };
+            return pageEnumerator.GetNextPage(500);
         }
 
-        private void LoadXmlFile()
+        public OnPrepareFetchOutputArgs OnPrepareFetch(OnPrepareFetchInputArgs args)
+        {
+            var directory = Path.GetDirectoryName(_xmlFilePath);
+            var xmlFileName = Path.GetFileName(_xmlFilePath);
+            _watcher = new FileSystemWatcher(directory, xmlFileName) { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime, EnableRaisingEvents = true };
+
+            pageEnumerator = new GQIPageEnumerator(_currentRows);
+            return new OnPrepareFetchOutputArgs();
+        }
+
+        public void OnStartUpdates(IGQIUpdater updater)
+        {
+            _updater = updater;
+
+            _watcher.Changed += OnChanged;
+        }
+
+        public void OnStopUpdates()
+        {
+            _watcher.Changed -= OnChanged;
+            _updater = null;
+        }
+
+        public OnDestroyOutputArgs OnDestroy(OnDestroyInputArgs args)
+        {
+            _watcher?.Dispose();
+            return new OnDestroyOutputArgs();
+        }
+
+        private static object ParseValue(object value, GQIColumn column)
+        {
+            switch (column.GetType().Name)
+            {
+                case nameof(GQIIntColumn):
+                    return Convert.ToInt32(value);
+
+                case nameof(GQIStringColumn):
+                    return value?.ToString() ?? string.Empty;
+
+                case nameof(GQIDateTimeColumn):
+                    return DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(value)).UtcDateTime;
+
+                case nameof(GQIDoubleColumn):
+                    return Convert.ToDouble(value);
+
+                case nameof(GQIBooleanColumn):
+                    return Convert.ToBoolean(value);
+
+                default:
+                    return value?.ToString() ?? string.Empty;
+            }
+        }
+
+        private void OnChanged(object sender, FileSystemEventArgs args)
+        {
+            if (!_watcher.EnableRaisingEvents)
+            {
+                _watcher?.Dispose();
+                var directory = Path.GetDirectoryName(_xmlFilePath);
+                var jsonFileName = Path.GetFileName(_xmlFilePath);
+                _watcher = new FileSystemWatcher(directory, jsonFileName) { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime, EnableRaisingEvents = true };
+
+                _watcher.Changed += OnChanged;
+            }
+
+            lock (_lock)
+            {
+                DateTime lastWriteTime;
+                lastWriteTime = File.GetLastWriteTime(args.FullPath);
+                if ((lastWriteTime - _lastReadTime).TotalMilliseconds < 500)
+                {
+                    return;
+                }
+
+                _lastReadTime = lastWriteTime;
+
+                List<GQIRow> newRows = GetNewRows();
+                try
+                {
+                    var comparison = new GqiTableComparer(_currentRows, newRows);
+
+                    foreach (var row in comparison.RemovedRows)
+                    {
+                        _updater.RemoveRow(row.Key);
+                    }
+
+                    foreach (var row in comparison.UpdatedRows)
+                    {
+                        _updater.UpdateRow(row);
+                    }
+
+                    foreach (var row in comparison.AddedRows)
+                    {
+                        _updater.AddRow(row);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error($"Error processing file changes: {ex.Message}");
+                }
+                finally
+                {
+                    _currentRows = newRows;
+                }
+            }
+        }
+
+        private List<GQIRow> GetNewRows()
         {
             var xmlDocument = XDocument.Load(_xmlFilePath);
             var rootElement = xmlDocument.Root;
@@ -143,7 +268,7 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
 
             // Process Rows
             var rowsElement = rootElement.Element("Rows")?.Elements("Row").ToList() ?? new List<XElement>();
-            _rows = ProcessRows(rowsElement);
+            return ProcessRows(rowsElement);
         }
 
         private List<GQIRow> ProcessRows(List<XElement> rowElements)
@@ -176,13 +301,13 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
         private GQIColumn CreateColumn(string name, string type)
         {
             string headerCapitalizedName = string.Empty;
-            if (!Enum.TryParse(_headerCapitalization, true, out HeaderCapitalization headerEnum))
+            if (!Enum.TryParse(_headerCapitalization, true, out HeaderInfo.HeaderCapitalization headerEnum))
             {
                 headerCapitalizedName = name;
             }
             else
             {
-                headerCapitalizedName = GetHeaderCapitalization(name, headerEnum);
+                headerCapitalizedName = HeaderInfo.GetHeaderCapitalization(name, headerEnum);
             }
 
             switch (type.ToLower())
@@ -200,90 +325,6 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
                 default:
                     return new GQIStringColumn(headerCapitalizedName);
             }
-        }
-
-        private static string GetHeaderCapitalization(string headerName, HeaderCapitalization headerCapitalizationType)
-        {
-            switch (headerCapitalizationType)
-            {
-                case HeaderCapitalization.Uppercase:
-                    return headerName.ToUpper();
-                case HeaderCapitalization.Lowercase:
-                    return headerName.ToLower();
-                case HeaderCapitalization.Titlecase:
-                    TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
-                    return textInfo.ToTitleCase(headerName.ToLower());
-                case HeaderCapitalization.Original:
-                default:
-                    return headerName;
-            }
-        }
-
-        private object ParseValue(object value, GQIColumn column)
-        {
-            switch (column.GetType().Name)
-            {
-                case nameof(GQIIntColumn):
-                    return Convert.ToInt32(value);
-
-                case nameof(GQIStringColumn):
-                    return value?.ToString() ?? string.Empty;
-
-                case nameof(GQIDateTimeColumn):
-                    return DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(value)).UtcDateTime;
-
-                case nameof(GQIDoubleColumn):
-                    return Convert.ToDouble(value);
-
-                case nameof(GQIBooleanColumn):
-                    return Convert.ToBoolean(value);
-
-                default:
-                    return value?.ToString() ?? string.Empty;
-            }
-        }
-
-        public void OnStartUpdates(IGQIUpdater updater)
-        {
-            _updater = updater;
-
-            var directory = Path.GetDirectoryName(_xmlFilePath);
-            var xmlFileName = Path.GetFileName(_xmlFilePath);
-            _watcher = new FileSystemWatcher(directory, xmlFileName) { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime, EnableRaisingEvents = true };
-
-            _watcher.Changed += OnChanged;
-        }
-
-        private void OnChanged(object sender, FileSystemEventArgs e)
-        {
-            DeleteRows();
-
-            LoadXmlFile();
-
-            foreach (var row in _rows)
-            {
-                _updater.AddRow(row);
-            }
-        }
-
-        private void DeleteRows()
-        {
-            foreach (var row in _rows)
-            {
-                _updater.RemoveRow(row.Key);
-            }
-
-            _rows.Clear();
-        }
-
-        public void OnStopUpdates()
-        {
-            if (_watcher is null)
-                return;
-
-            _watcher.Changed -= OnChanged;
-            _watcher.Dispose();
-            _updater = null;
         }
     }
 }

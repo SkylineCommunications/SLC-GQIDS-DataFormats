@@ -1,4 +1,4 @@
-﻿namespace GQIHelper.HeaderInfo
+﻿namespace Common.HeaderInfo
 {
     using System;
     using System.Collections.Generic;
@@ -100,7 +100,7 @@
             }
         }
 
-        private static string GetHeaderCapitalization(string headerName, HeaderCapitalization headerCapitalizationType)
+        public static string GetHeaderCapitalization(string headerName, HeaderCapitalization headerCapitalizationType)
         {
             switch (headerCapitalizationType)
             {

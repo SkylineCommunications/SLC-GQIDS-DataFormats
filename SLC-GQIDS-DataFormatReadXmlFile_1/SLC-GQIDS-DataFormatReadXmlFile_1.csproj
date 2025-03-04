@@ -17,12 +17,7 @@
     <DefineConstants>$(DefineConstants);DCFv1;DBInfo;ALARM_SQUASHING</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.5.1" />
-    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding" Version="1.0.0" />
-    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="1.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.4.5" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Xml.Linq" />
@@ -32,4 +27,5 @@
       <UserProperties DisLinkedXmlFile="..\SLC-GQIDS-DataFormatReadXmlFile.xml" DisProjectType="automationScriptProject" DisLinkId="1" />
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\GQIHelper\GQIHelper.projitems" Label="Shared" />
 </Project>
