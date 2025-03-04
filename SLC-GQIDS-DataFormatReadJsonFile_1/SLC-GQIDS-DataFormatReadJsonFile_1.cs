@@ -38,14 +38,6 @@ namespace JSONFile
         private DateTime _lastReadTime = DateTime.MinValue;
         private IGQILogger _logger;
 
-        public enum HeaderCapitalization
-        {
-            Uppercase,
-            Lowercase,
-            Titlecase,
-            Original,
-        }
-
         public OnInitOutputArgs OnInit(OnInitInputArgs args)
         {
             _logger = args.Logger;
@@ -121,6 +113,30 @@ namespace JSONFile
             return new OnDestroyOutputArgs();
         }
 
+        private static object ParseValue(object value, GQIColumn column)
+        {
+            switch (column.GetType().Name)
+            {
+                case nameof(GQIIntColumn):
+                    return Convert.ToInt32(value);
+
+                case nameof(GQIStringColumn):
+                    return value?.ToString() ?? string.Empty;
+
+                case nameof(GQIDateTimeColumn):
+                    return DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(value)).UtcDateTime;
+
+                case nameof(GQIDoubleColumn):
+                    return Convert.ToDouble(value);
+
+                case nameof(GQIBooleanColumn):
+                    return Convert.ToBoolean(value);
+
+                default:
+                    return value?.ToString() ?? string.Empty;
+            }
+        }
+
         private void OnChanged(object sender, FileSystemEventArgs args)
         {
             if (!_watcher.EnableRaisingEvents)
@@ -172,30 +188,6 @@ namespace JSONFile
                 {
                     _currentRows = newRows;
                 }
-            }
-        }
-
-        private object ParseValue(object value, GQIColumn column)
-        {
-            switch (column.GetType().Name)
-            {
-                case nameof(GQIIntColumn):
-                    return Convert.ToInt32(value);
-
-                case nameof(GQIStringColumn):
-                    return value?.ToString() ?? string.Empty;
-
-                case nameof(GQIDateTimeColumn):
-                    return DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(value)).UtcDateTime;
-
-                case nameof(GQIDoubleColumn):
-                    return Convert.ToDouble(value);
-
-                case nameof(GQIBooleanColumn):
-                    return Convert.ToBoolean(value);
-
-                default:
-                    return value?.ToString() ?? string.Empty;
             }
         }
 

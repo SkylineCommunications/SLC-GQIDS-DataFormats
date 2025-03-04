@@ -64,7 +64,7 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
     using Skyline.DataMiner.Analytics.GenericInterface;
 
     [GQIMetaData(Name = "XML File")]
-    public class XMLFile : IGQIDataSource, IGQIInputArguments, IGQIUpdateable, IGQIOnDestroy, IGQIOnPrepareFetch, IGQIOnInit
+    public class XmlFile : IGQIDataSource, IGQIInputArguments, IGQIUpdateable, IGQIOnDestroy, IGQIOnPrepareFetch, IGQIOnInit
     {
         private const string XML_ROOT_PATH = @"C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXMLFile\";
 
@@ -171,6 +171,30 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
         {
             _watcher?.Dispose();
             return new OnDestroyOutputArgs();
+        }
+
+        private static object ParseValue(object value, GQIColumn column)
+        {
+            switch (column.GetType().Name)
+            {
+                case nameof(GQIIntColumn):
+                    return Convert.ToInt32(value);
+
+                case nameof(GQIStringColumn):
+                    return value?.ToString() ?? string.Empty;
+
+                case nameof(GQIDateTimeColumn):
+                    return DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(value)).UtcDateTime;
+
+                case nameof(GQIDoubleColumn):
+                    return Convert.ToDouble(value);
+
+                case nameof(GQIBooleanColumn):
+                    return Convert.ToBoolean(value);
+
+                default:
+                    return value?.ToString() ?? string.Empty;
+            }
         }
 
         private void OnChanged(object sender, FileSystemEventArgs args)
@@ -300,30 +324,6 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
                     return new GQIBooleanColumn(headerCapitalizedName);
                 default:
                     return new GQIStringColumn(headerCapitalizedName);
-            }
-        }
-
-        private static object ParseValue(object value, GQIColumn column)
-        {
-            switch (column.GetType().Name)
-            {
-                case nameof(GQIIntColumn):
-                    return Convert.ToInt32(value);
-
-                case nameof(GQIStringColumn):
-                    return value?.ToString() ?? string.Empty;
-
-                case nameof(GQIDateTimeColumn):
-                    return DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(value)).UtcDateTime;
-
-                case nameof(GQIDoubleColumn):
-                    return Convert.ToDouble(value);
-
-                case nameof(GQIBooleanColumn):
-                    return Convert.ToBoolean(value);
-
-                default:
-                    return value?.ToString() ?? string.Empty;
             }
         }
     }
