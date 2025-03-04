@@ -260,7 +260,7 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
             {
                 DateTime lastWriteTime;
                 lastWriteTime = File.GetLastWriteTime(args.FullPath);
-                if ((lastWriteTime - _lastReadTime).TotalMilliseconds < 1000)
+                if ((lastWriteTime - _lastReadTime).TotalMilliseconds < 500)
                 {
                     return;
                 }
@@ -268,22 +268,27 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
                 _lastReadTime = lastWriteTime;
 
                 List<GQIRow> newRows = CalculateNewRows();
+
                 try
                 {
-                    var comparison = new GqiTableComparer(_currentRows, newRows);
-                    foreach (var row in comparison.RemovedRows)
+                    if (newRows != null)
                     {
-                        _updater.RemoveRow(row.Key);
-                    }
+                        var comparison = new GqiTableComparer(_currentRows, newRows);
+                        _logger.Information(comparison.ToString());
+                        foreach (var row in comparison.RemovedRows)
+                        {
+                            _updater.RemoveRow(row.Key);
+                        }
 
-                    foreach (var row in comparison.UpdatedRows)
-                    {
-                        _updater.UpdateRow(row);
-                    }
+                        foreach (var row in comparison.UpdatedRows)
+                        {
+                            _updater.UpdateRow(row);
+                        }
 
-                    foreach (var row in comparison.AddedRows)
-                    {
-                        _updater.AddRow(row);
+                        foreach (var row in comparison.AddedRows)
+                        {
+                            _updater.AddRow(row);
+                        }
                     }
                 }
                 catch (Exception ex)

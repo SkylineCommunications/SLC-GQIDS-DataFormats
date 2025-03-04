@@ -189,7 +189,7 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
             {
                 DateTime lastWriteTime;
                 lastWriteTime = File.GetLastWriteTime(args.FullPath);
-                if ((lastWriteTime - _lastReadTime).TotalMilliseconds < 1000)
+                if ((lastWriteTime - _lastReadTime).TotalMilliseconds < 500)
                 {
                     return;
                 }
