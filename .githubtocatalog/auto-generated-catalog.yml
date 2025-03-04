@@ -41,7 +41,7 @@ title: Data Format
 # General information about the Catalog item.
 #   Max length: 100,000 characters
 # Currently not shown in the Catalog UI but will be supported in the near future.
-short_description: No description available
+short_description: DataFormats enables seamless data visualization and transformation from CSV, JSON, and XML files, ensuring smooth integration with your workflow.
 # [Optional]
 # A valid URL that points to the source code.
 #   A valid URL
@@ -59,11 +59,11 @@ documentation_url:
 #   The name is required; max 256 characters.
 #   The email and url are optional, and should be in valid email/URL formats.
 owners:
-  - email: carlos.matheus@akyline.be
-    name: Carlos Matheus
-    url: 
   - email: blake.smethers@skyline.be
     name: Blake Smethers
+    url: 
+  - email: carlos.matheus@skyline.be
+    name: Carlos Matheus
     url: 
   - email: sebastian.ulloa@skyline.be
     name: Sebastian Ulloa
@@ -75,7 +75,5 @@ owners:
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
 tags:
-  - Data Format
-  - CSV
-  - JSON
-  - XML
+  - Data Processing
+  - CSV JSON XML
