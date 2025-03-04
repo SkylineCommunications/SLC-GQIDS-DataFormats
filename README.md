@@ -83,10 +83,6 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
     </Rows>
 </Data>
 ```
-
-## Get Started Today! 🚀
-Try **DataFormats** and experience fast, hassle-free data transformation. Whether you’re working with CSV, JSON, or XML, this package streamlines your data workflows like never before.  
-
 For **technical details**, advanced configuration, and troubleshooting, refer to the **full documentation in your repository**.
 
 ## License
