@@ -38,7 +38,6 @@ title: Data Format
 # General information about the Catalog item.
 #   Max length: 100,000 characters
 # Currently not shown in the Catalog UI but will be supported in the near future.
-short_description: 'DataFormats enables seamless data visualization and transformation from CSV, JSON, and XML files, ensuring smooth integration with your workflow.'
 # [Optional]
 # A valid URL that points to the source code.
 #   A valid URL
