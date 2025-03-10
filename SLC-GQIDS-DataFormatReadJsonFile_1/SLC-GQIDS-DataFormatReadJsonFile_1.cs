@@ -97,40 +97,18 @@ namespace JSONFile
 
         public void OnStartUpdates(IGQIUpdater updater)
         {
-            _logger.Information("OnStartUpdates");
             _updater = updater;
             _watcher.Changed += OnChanged;
-
-            _watcher.Disposed += OnDisposed;
-            _watcher.Error += OnError;
-            _watcher.Deleted += OnDeleted;
-        }
-
-        private void OnDeleted(object sender, FileSystemEventArgs e)
-        {
-            _logger.Information("OnDeleted");
-        }
-
-        private void OnError(object sender, ErrorEventArgs e)
-        {
-            _logger.Information("OnError");
-        }
-
-        private void OnDisposed(object sender, EventArgs e)
-        {
-            _logger.Information("OnDisposed");
         }
 
         public void OnStopUpdates()
         {
-            _logger.Information("OnStopUpdates");
             _watcher.Changed -= OnChanged;
             _updater = null;
         }
 
         public OnDestroyOutputArgs OnDestroy(OnDestroyInputArgs args)
         {
-            _logger.Information("OnDestroy");
             _watcher?.Dispose();
             return new OnDestroyOutputArgs();
         }
@@ -161,28 +139,23 @@ namespace JSONFile
 
         private void OnChanged(object sender, FileSystemEventArgs args)
         {
-            _logger.Information("OnChanged");
-
-            _logger.Information("_lock");
             lock (_lock)
             {
                 DateTime lastWriteTime;
                 lastWriteTime = File.GetLastWriteTime(args.FullPath);
-                _logger.Information($"Last Write Time: {lastWriteTime}, Last Read Time: {_lastReadTime}, {(lastWriteTime - _lastReadTime).TotalMilliseconds}");
+
                 if ((lastWriteTime - _lastReadTime).TotalMilliseconds < 500)
                 {
-                    _logger.Information("returning <500");
                     return;
                 }
 
                 _lastReadTime = lastWriteTime;
 
                 List<GQIRow> newRows = GetNewRows();
-                _logger.Information($"{newRows.Count}");
+
                 try
                 {
                     var comparison = new GqiTableComparer(_currentRows, newRows);
-                    _logger.Information(comparison.ToString());
                     foreach (var row in comparison.RemovedRows)
                     {
                         _updater.RemoveRow(row.Key);
