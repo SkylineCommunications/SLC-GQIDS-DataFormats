@@ -241,21 +241,6 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 
         private void OnChanged(object sender, FileSystemEventArgs args)
         {
-            if (!_watcher.EnableRaisingEvents)
-            {
-                _watcher?.Dispose();
-                var directory = Path.GetDirectoryName(_csvFilePath);
-                var sFileName = Path.GetFileName(_csvFilePath);
-
-                _watcher = new FileSystemWatcher(directory, sFileName)
-                {
-                    NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime,
-                    EnableRaisingEvents = true,
-                };
-
-                _watcher.Changed += OnChanged;
-            }
-
             lock (_lock)
             {
                 DateTime lastWriteTime;

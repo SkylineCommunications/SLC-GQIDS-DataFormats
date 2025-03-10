@@ -199,16 +199,6 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
 
         private void OnChanged(object sender, FileSystemEventArgs args)
         {
-            if (!_watcher.EnableRaisingEvents)
-            {
-                _watcher?.Dispose();
-                var directory = Path.GetDirectoryName(_xmlFilePath);
-                var jsonFileName = Path.GetFileName(_xmlFilePath);
-                _watcher = new FileSystemWatcher(directory, jsonFileName) { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime, EnableRaisingEvents = true };
-
-                _watcher.Changed += OnChanged;
-            }
-
             lock (_lock)
             {
                 DateTime lastWriteTime;
@@ -253,7 +243,12 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
 
         private List<GQIRow> GetNewRows()
         {
-            var xmlDocument = XDocument.Load(_xmlFilePath);
+            XDocument xmlDocument;
+            using (var stream = new FileStream(_xmlFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                xmlDocument = XDocument.Load(stream);
+            }
+
             var rootElement = xmlDocument.Root;
 
             if (rootElement == null)

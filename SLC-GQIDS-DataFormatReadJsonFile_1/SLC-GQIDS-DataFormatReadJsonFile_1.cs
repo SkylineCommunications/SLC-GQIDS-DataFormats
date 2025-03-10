@@ -97,18 +97,40 @@ namespace JSONFile
 
         public void OnStartUpdates(IGQIUpdater updater)
         {
+            _logger.Information("OnStartUpdates");
             _updater = updater;
             _watcher.Changed += OnChanged;
+
+            _watcher.Disposed += OnDisposed;
+            _watcher.Error += OnError;
+            _watcher.Deleted += OnDeleted;
+        }
+
+        private void OnDeleted(object sender, FileSystemEventArgs e)
+        {
+            _logger.Information("OnDeleted");
+        }
+
+        private void OnError(object sender, ErrorEventArgs e)
+        {
+            _logger.Information("OnError");
+        }
+
+        private void OnDisposed(object sender, EventArgs e)
+        {
+            _logger.Information("OnDisposed");
         }
 
         public void OnStopUpdates()
         {
+            _logger.Information("OnStopUpdates");
             _watcher.Changed -= OnChanged;
             _updater = null;
         }
 
         public OnDestroyOutputArgs OnDestroy(OnDestroyInputArgs args)
         {
+            _logger.Information("OnDestroy");
             _watcher?.Dispose();
             return new OnDestroyOutputArgs();
         }
@@ -139,32 +161,28 @@ namespace JSONFile
 
         private void OnChanged(object sender, FileSystemEventArgs args)
         {
-            if (!_watcher.EnableRaisingEvents)
-            {
-                _watcher?.Dispose();
-                var directory = Path.GetDirectoryName(_jsonFilePath);
-                var jsonFileName = Path.GetFileName(_jsonFilePath);
-                _watcher = new FileSystemWatcher(directory, jsonFileName) { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime, EnableRaisingEvents = true };
+            _logger.Information("OnChanged");
 
-                _watcher.Changed += OnChanged;
-            }
-
+            _logger.Information("_lock");
             lock (_lock)
             {
                 DateTime lastWriteTime;
                 lastWriteTime = File.GetLastWriteTime(args.FullPath);
+                _logger.Information($"Last Write Time: {lastWriteTime}, Last Read Time: {_lastReadTime}, {(lastWriteTime - _lastReadTime).TotalMilliseconds}");
                 if ((lastWriteTime - _lastReadTime).TotalMilliseconds < 500)
                 {
+                    _logger.Information("returning <500");
                     return;
                 }
 
                 _lastReadTime = lastWriteTime;
 
                 List<GQIRow> newRows = GetNewRows();
+                _logger.Information($"{newRows.Count}");
                 try
                 {
                     var comparison = new GqiTableComparer(_currentRows, newRows);
-
+                    _logger.Information(comparison.ToString());
                     foreach (var row in comparison.RemovedRows)
                     {
                         _updater.RemoveRow(row.Key);
@@ -194,7 +212,14 @@ namespace JSONFile
         private List<GQIRow> GetNewRows()
         {
             var rows = new List<GQIRow>();
-            string jsonContent = File.ReadAllText(_jsonFilePath);
+
+            string jsonContent;
+            using (var stream = new FileStream(_jsonFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var reader = new StreamReader(stream))
+            {
+                jsonContent = reader.ReadToEnd();
+            }
+
             var jsonData = JsonConvert.DeserializeObject<JSONData>(jsonContent);
 
             if (jsonData?.Columns == null || jsonData.Rows == null)
