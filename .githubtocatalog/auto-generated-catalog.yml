@@ -76,4 +76,6 @@ owners:
 #   Cannot contain leading or trailing whitespace characters.
 tags:
   - Data Processing
-  - CSV JSON XML
+  - CSV
+  - JSON
+  - XML
