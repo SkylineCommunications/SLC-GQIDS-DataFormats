@@ -63,5 +63,7 @@ owners:
     email: sebastian.ulloa@skyline.be
 tags: 
   - Data Processing
-  - CSV JSON XML
+  - CSV 
+  - JSON
+  - XML
   - Automation
