@@ -20,7 +20,7 @@ Easily convert and visualize data from **CSV, JSON, and XML** files with **DataF
 
 ### CSV Processing
 📂 **File Path:**  
-`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
+`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
 
 🔹 **Smart Delimiter Detection** – Identifies `,` `;` `\t` `|` automatically.  
 
@@ -40,7 +40,7 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 
 ### JSON Processing
 📂 **File Path:**  
-`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile`
+`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile`
 
 🔹 **Column-based Structure** – Define each column with `Name` and `Type`.
 
@@ -69,7 +69,7 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 
 ### XML Processing
 📂 **File Path:**  
-`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`
+`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`
 
 🔹 **Structured Data Extraction** – Define columns and rows for seamless parsing.  
 
