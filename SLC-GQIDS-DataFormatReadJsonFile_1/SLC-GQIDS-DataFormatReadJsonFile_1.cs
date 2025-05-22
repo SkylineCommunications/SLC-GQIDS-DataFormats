@@ -13,8 +13,8 @@ namespace JSONFile
     using Skyline.DataMiner.Analytics.GenericInterface;
 
     [GQIMetaData(Name = "JSON File")]
-    public class JSONFile : IGQIDataSource, IGQIInputArguments, IGQIUpdateable, IGQIOnInit, IGQIOnPrepareFetch, IGQIOnDestroy
-    {
+    public class JSONFile : IGQIDataSource, IGQIInputArguments, IGQIOnInit, IGQIOnPrepareFetch, IGQIOnDestroy/*, IGQIUpdateable*/
+	{
         private const string JSON_ROOT_PATH = @"C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile\";
 
         private readonly GQIStringArgument fileName = new GQIStringArgument("File name") { IsRequired = true };
