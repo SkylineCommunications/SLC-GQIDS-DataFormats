@@ -18,7 +18,7 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 	[GQIMetaData(Name = "CSV File")]
 	public class SLCGQIDSDataFormatReadCsvFile : IGQIDataSource, IGQIOnPrepareFetch, IGQIInputArguments, IGQIOnInit, IGQIOnDestroy/*, IGQIUpdateable*/
 	{
-		private const string CSV_ROOT_PATH = @"C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile";
+		private const string CSV_ROOT_PATH = @"C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile";
 
 		private readonly string[] commonDelimeters = { ",", ";", "\t", "|" };
 		private readonly GQIStringArgument fileName = new GQIStringArgument("File name") { IsRequired = true };

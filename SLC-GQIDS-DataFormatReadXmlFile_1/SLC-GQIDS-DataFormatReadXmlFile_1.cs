@@ -66,7 +66,7 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
 	[GQIMetaData(Name = "XML File")]
 	public class XmlFile : IGQIDataSource, IGQIInputArguments, IGQIOnDestroy, IGQIOnPrepareFetch, IGQIOnInit/*, IGQIUpdateable*/
 	{
-		private const string XML_ROOT_PATH = @"C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXMLFile\";
+		private const string XML_ROOT_PATH = @"C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXMLFile\";
 
 		private readonly GQIStringArgument fileName = new GQIStringArgument("File name") { IsRequired = true };
 		private readonly GQIStringDropdownArgument headerCapitalization =

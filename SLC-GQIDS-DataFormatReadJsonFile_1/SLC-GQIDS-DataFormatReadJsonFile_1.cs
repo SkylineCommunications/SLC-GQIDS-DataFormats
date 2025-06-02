@@ -15,7 +15,7 @@ namespace JSONFile
     [GQIMetaData(Name = "JSON File")]
     public class JSONFile : IGQIDataSource, IGQIInputArguments, IGQIOnInit, IGQIOnPrepareFetch, IGQIOnDestroy/*, IGQIUpdateable*/
 	{
-        private const string JSON_ROOT_PATH = @"C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile\";
+        private const string JSON_ROOT_PATH = @"C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile\";
 
         private readonly GQIStringArgument fileName = new GQIStringArgument("File name") { IsRequired = true };
         private readonly GQIStringDropdownArgument headerCapitalization =
