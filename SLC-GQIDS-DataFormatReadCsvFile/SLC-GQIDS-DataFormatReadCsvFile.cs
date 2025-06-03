@@ -37,7 +37,7 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 
 		private readonly DateTimeConverter _dateTimeConverter = new DateTimeConverter();
 
-		private readonly object _lock = new object();
+		// private readonly object _lock = new object();
 		private string _delimiter;
 		private string _headerCapitalization;
 		private string _csvFilePath;
@@ -45,7 +45,7 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 		private List<GQIRow> _currentRows;
 		// private IGQIUpdater _updater;
 		private FileSystemWatcher _watcher;
-		private DateTime _lastReadTime = DateTime.MinValue;
+		// private DateTime _lastReadTime = DateTime.MinValue;
 		// private IGQILogger _logger;
 		private GQIPageEnumerator pageEnumerator;
 
@@ -187,14 +187,14 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 			var rows = new List<GQIRow>();
 			while (reader.Read())
 			{
-				var row = ReadRow(reader, columnTypes, rows.Count);
+				var row = ReadRow(reader, columnTypes/*, rows.Count*/);
 				rows.Add(row);
 			}
 
 			return rows;
 		}
 
-		private GQIRow ReadRow(CsvReader reader, Type[] columnTypes, int key)
+		private GQIRow ReadRow(CsvReader reader, Type[] columnTypes/*, int key*/)
 		{
 			var cells = columnTypes.Select((type, index) => GetCell(reader, index, type));
 			return new GQIRow(cells.ToArray());
@@ -212,35 +212,35 @@ namespace SLCGQIDSDataFormatReadCsvFile_1
 			return new GQICell { Value = value };
 		}
 
-		private List<GQIRow> CalculateNewRows()
-		{
-			try
-			{
-				using (var fileStream = new FileStream(_csvFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-				{
-					using (var streamReader = new StreamReader(fileStream))
-					{
-						var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-						{
-							Delimiter = _delimiter,
-						};
+		//private List<GQIRow> CalculateNewRows()
+		//{
+		//	try
+		//	{
+		//		using (var fileStream = new FileStream(_csvFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+		//		{
+		//			using (var streamReader = new StreamReader(fileStream))
+		//			{
+		//				var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+		//				{
+		//					Delimiter = _delimiter,
+		//				};
 
-						using (var csvReader = new CsvReader(streamReader, config))
-						{
-							csvReader.Read();
-							csvReader.ReadHeader();
-							var newRows = ReadRows(csvReader);
-							return newRows;
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				// _logger.Information($"Error reading csv file: {ex.Message}");
-				return new List<GQIRow>();
-			}
-		}
+		//				using (var csvReader = new CsvReader(streamReader, config))
+		//				{
+		//					csvReader.Read();
+		//					csvReader.ReadHeader();
+		//					var newRows = ReadRows(csvReader);
+		//					return newRows;
+		//				}
+		//			}
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		// _logger.Information($"Error reading csv file: {ex.Message}");
+		//		return new List<GQIRow>();
+		//	}
+		//}
 
 		// private void OnChanged(object sender, FileSystemEventArgs args)
 		// {

@@ -1,9 +1,9 @@
-﻿namespace Common.RealTimeUpdates
-{
-    using System;
-    using System.Collections.Generic;
+﻿// namespace Common.RealTimeUpdates
+// {
+//    using System;
+//    using System.Collections.Generic;
 
-    using Skyline.DataMiner.Analytics.GenericInterface;
+//    using Skyline.DataMiner.Analytics.GenericInterface;
 
     // public class GqiRowComparer : IEqualityComparer<GQIRow>
     // {
@@ -43,4 +43,4 @@
     //         return row.Key?.GetHashCode() ?? 0;
     //     }
     // }
-}
+// }

@@ -78,7 +78,7 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
 			DefaultValue = "Original",
 		};
 
-		private readonly object _lock = new object();
+		// private readonly object _lock = new object();
 		private string _headerCapitalization;
 		private List<GQIColumn> _columns = new List<GQIColumn>();
 		private List<GQIRow> _currentRows = new List<GQIRow>();
@@ -86,7 +86,7 @@ namespace SLC_GQIDS_DataFormatReadXmlFile_1
 		// private IGQIUpdater _updater;
 		private FileSystemWatcher _watcher;
 		private GQIPageEnumerator pageEnumerator;
-		private DateTime _lastReadTime = DateTime.MinValue;
+		// private DateTime _lastReadTime = DateTime.MinValue;
 		// private IGQILogger _logger;
 
 		public enum HeaderCapitalization
