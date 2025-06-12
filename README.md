@@ -18,21 +18,21 @@ Whether you are an analyst, developer, or business user, this package will help 
 
 ### CSV-related features
 
-- **Smart Delimiter Detection** – Identifies `,` `;` `\t` `|` automatically.  
-- **Header Capitalization Control** – Choose how headers should be formatted.  
-- **Type Conversion** – Define column types using `::type` suffixes.
-- **Supports All Common Data Types** (`bool, datetime, double, int, string (default)`).
+- **Smart delimiter detection** – Identifies `,` `;` `\t` `|` automatically.  
+- **Header capitalization control** – Choose how headers should be formatted.  
+- **Type conversion** – Define column types using `::type` suffixes.
+- **Supports all common data types** - `bool`, `datetime`, `double`, `int`, `string` (default)
 
 ### JSON-related features
 
-- **Column-based Structure** – Define each column with `Name` and `Type`.
-- **Supports Structured JSON** for easy integration.
-- **Supports All Common Data Types** (`bool, datetime, double, int, string`).
+- **Column-based structure** – Define each column with `Name` and `Type`.
+- **Supports structured JSON** - For easy integration.
+- **Supports all common data types** - `bool`, `datetime`, `double`, `int`, `string`
 
 ### XML-related features
 
-- **Structured Data Extraction** – Define columns and rows for seamless parsing.  
-- **Supports All Common Data Types** (`bool, datetime, double, int, string`).
+- **Structured data extraction** – Define columns and rows for seamless parsing.  
+- **Supports all common data types** - `bool`, `datetime`, `double`, `int`, `string`
 
 ## Use Cases
 
@@ -100,8 +100,8 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 
 ## Technical Reference
 
-For **technical details**, advanced configuration, and troubleshooting, refer to the **full documentation** for each script:
+For **technical details**, advanced configuration, and troubleshooting, see the **full documentation** for each script:
 
-- [CSV File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadCsvFile_1/README.md)
-- [JSON File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadJsonFile_1/README.md)
-- [XML File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadXmlFile_1/README.md)
+- [CSV File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadCsvFile/CatalogInformation/README.md)
+- [JSON File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadJsonFile/CatalogInformation/README.md)
+- [XML File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadXmlFile/CatalogInformation/README.md)
