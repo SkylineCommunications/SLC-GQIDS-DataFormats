@@ -1,55 +1,64 @@
-# DataFormats
+# File Reader
 
-## Unlock the Power of Seamless Data Transformation
-Easily convert and visualize data from **CSV, JSON, and XML** files with **DataFormats**. Whether you're an analyst, developer, or business user, this package helps you streamline your workflow and extract insights from raw data with minimal effort.
+## About
 
-### Why Choose DataFormats?
-✅ **Effortless Data Processing** – Simply place your file in the right folder, and let DataFormats handle the rest. No complex setup required!  
-✅ **Smart Delimiter Detection** – Automatically identifies delimiters in CSV files, ensuring smooth data imports.  
-✅ **Flexible Type Conversion** – Supports **bool, datetime, double, int,** and **string** formats for seamless data transformation.  
-✅ **Automated Directory Creation** – Missing the required folder? No worries—DataFormats creates it for you.  
-✅ **Multi-Format Compatibility** – Works with CSV, JSON, and XML, making it the perfect all-in-one data processing solution.
+This package allows you to easily convert and visualize data from **CSV, JSON, and XML files**.
 
-### How It Works
-1️⃣ **Drop your file** in the designated directory.  
-2️⃣ **Run the corresponding script**, and DataFormats will process your data instantly.  
-3️⃣ **Visualize, analyze, and integrate** the processed data into your system.  
+Whether you are an analyst, developer, or business user, this package will help you streamline your workflow and extract insights from raw data with minimal effort.
 
+## Key Features
 
-## Supported Formats
+### General features
 
-### CSV Processing
-📂 **File Path:**  
-`C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
+- **Effortless data processing** – Simply place your file in the right folder, and let File Reader handle the rest. No complex setup required.
+- **Smart delimiter detection** – Automatically identifies delimiters in CSV files, ensuring smooth data imports.  
+- **Flexible type conversion** – Supports **bool, datetime, double, int, and string** formats for seamless data transformation.  
+- **Automated directory creation** – Missing the required folder? No worries. File Reader will create it for you.  
+- **Multi-format compatibility** – Works with CSV, JSON, and XML, making it the perfect all-in-one data processing solution.
 
-🔹 **Smart Delimiter Detection** – Identifies `,` `;` `\t` `|` automatically.  
+### CSV-related features
 
-🔹 **Header Capitalization Control** – Choose how headers should be formatted.  
+- **Smart delimiter detection** – Identifies `,` `;` `\t` `|` automatically.  
+- **Header capitalization control** – Choose how headers should be formatted.  
+- **Type conversion** – Define column types using `::type` suffixes.
+- **Supports all common data types** - `bool`, `datetime`, `double`, `int`, `string` (default)
 
-🔹 **Type Conversion** – Define column types using `::type` suffixes.
+### JSON-related features
 
-🔹 **Supports All Common Data Types** (`bool, datetime, double, int, string (default)`).
+- **Column-based structure** – Define each column with `Name` and `Type`.
+- **Supports structured JSON** - For easy integration.
+- **Supports all common data types** - `bool`, `datetime`, `double`, `int`, `string`
 
+### XML-related features
 
-🔹 **Example CSV Format:**
+- **Structured data extraction** – Define columns and rows for seamless parsing.  
+- **Supports all common data types** - `bool`, `datetime`, `double`, `int`, `string`
+
+## Use Cases
+
+### How to convert a CSV, JSON, or XML file
+
+1. **Drop your file** in the designated folder:
+
+   | File | Folder |
+   |------|--------|
+   | CSV file  | `C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`  |
+   | JSON file | `C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile` |
+   | XML file  | `C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`  |
+  
+1. **Run the corresponding script**, and File Reader will process your data instantly.  
+1. **Visualize, analyze, and integrate** the processed data into your system.  
+
+### Example CSV format
+
 ```csv
 Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 06/12/2023 01:00,Cisco CMTS,36,1081.788,false
 06/12/2023 01:21,Huawei 5600 5800,4,196.621,true
 ```
 
-### JSON Processing
-📂 **File Path:**  
-`C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile`
+### Example JSON format
 
-🔹 **Column-based Structure** – Define each column with `Name` and `Type`.
-
-🔹 **Supports Structured JSON** for easy integration.
-
-🔹 **Supports All Common Data Types** (`bool, datetime, double, int, string`).
-
-
-🔹 **Example JSON Format:**
 ```json
 {
     "Columns": [
@@ -67,16 +76,8 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 }
 ```
 
-### XML Processing
-📂 **File Path:**  
-`C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`
+### Example XML format
 
-🔹 **Structured Data Extraction** – Define columns and rows for seamless parsing.  
-
-🔹 **Supports All Common Data Types** (`bool, datetime, double, int, string`).
-
-
-🔹 **Example XML Format:**
 ```xml
 <Data>
     <Columns>
@@ -97,13 +98,10 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 </Data>
 ```
 
-## Get Started Today!
-Experience efficient and seamless data transformation with **DataFormats**. Designed for handling CSV, JSON, and XML files, this package optimizes your workflow by automating data processing and integration.
+## Technical Reference
 
-For **technical details**, advanced configuration, and troubleshooting, refer to the **full documentation** for each script:
+For **technical details**, advanced configuration, and troubleshooting, see the **full documentation** for each script:
 
-- 📄 [CSV File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadCsvFile_1/README.md)
-- 📄 [JSON File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadJsonFile_1/README.md)
-- 📄 [XML File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadXmlFile_1/README.md)
-
-small change
+- [CSV File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadCsvFile/CatalogInformation/README.md)
+- [JSON File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadJsonFile/CatalogInformation/README.md)
+- [XML File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadXmlFile/CatalogInformation/README.md)

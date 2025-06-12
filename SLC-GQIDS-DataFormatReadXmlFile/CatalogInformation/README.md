@@ -1,51 +1,57 @@
-# SLC-GQIDS-DataFormatReadXmlFile
+# XML File Reader
 
-GQI data source that can read in XML files.
+## About
 
-The file to be imported must be placed in the following path:
-`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`
+This package contains a GQI data source that can read JSON files.
 
-If the specified path does not exist, the GQI automatically creates it, allowing users to add the XML file later.
+## Use Cases
 
-## Structure
+### How to convert an XML file
 
-The XML file consists of two properties:
+1. **Drop your file** in the following folder:
 
-* Columns
-* Rows
+   `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`
+  
+   > [!NOTE]
+   > If the specified path does not exist, GQI will automatically creates it, allowing users to add the XML file later.
 
+1. **Run the corresponding script**, and File Reader will process your data instantly.  
+1. **Visualize, analyze, and integrate** the processed data into your system.  
 
-### Columns
+### XML file structure
 
-An array containing the columns of the data set. A column consists of 2 properties:
+The XML file consists of the following properties:
 
-* Name
-* Type
+- Columns
+- Rows
 
-The name is a string and contains the display name of the column.
-The type is a string that identifies the content type of that column.
+#### Columns
 
-Currently the following types are available:
+An array containing the columns of the data set.
 
-* boolean
-* datetime
-* double
-* int
-* string
+A column consists of the following properties:
 
-### Rows
+- Name: A string containing the display name of the column.
+- Type: A string containing the content type of the column.
 
-An array containing the rows of the data set. Every row contains of an array of cells.
+Currently, the following content types are available:
 
-Every cell consists of 2 properties.
+- boolean
+- datetime
+- double
+- int
+- string
 
-* Value
-* DisplayValue
+#### Rows
 
-The value can be a string or number.
-The display value is a string representation of the value.
+An array containing the rows of the data set.
 
-## Example
+Every row contains an array of cells, and every cell consists of the following properties:
+
+- Value: A string or a number.
+- DisplayValue: The string representation of the value.
+
+#### Example of an XML file
 
 ```xml
 <Data>

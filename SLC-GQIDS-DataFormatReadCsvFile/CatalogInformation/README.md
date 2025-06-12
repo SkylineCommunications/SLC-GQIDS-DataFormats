@@ -1,15 +1,17 @@
-# SLC-GQIDS-DataFormatReadCsvFile
+# CSV File Reader
 
-A custom GQI data source to import values from CSV files.
+## About
 
-The file to be imported must be placed in the following path:
-`C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
+This package contains a GQI data source that can read CSV files.
 
-If the specified path does not exist, the GQI automatically creates it, allowing users to add the file later. The solution also detects the delimiter when none is specified and supports adjusting the capitalization of table headers based on user-provided arguments, making it both flexible and user-friendly.
+## Key Features
 
-## Delimiter smart detection
+### Smart delimiter detection
   
-If no delimiter is provided, the GQI will detect the most common delimiter character in the header (first line) of the CSV file. The smart detection feature is capable of identifying delimiters only from the following set
+If no delimiter is provided, GQI will detect the most common delimiter character in the header (i.e. first line) of the CSV file.
+
+The smart detection feature is capable of identifying delimiters only from the following set:
+
 - `,`
 - `;`
 - `\t`
@@ -17,12 +19,15 @@ If no delimiter is provided, the GQI will detect the most common delimiter chara
 
 ## Header capitalization
 
-The GQI allows users to specify the desired header capitalization method as an argument. If no value is provided, the headers will retain their original capitalization as read from the CSV file.
+GQI allows users to specify the desired header capitalization method as an argument.
+
+If no value is provided, the headers will retain their original capitalization as read from the CSV file.
 
 ## Type conversion
 
 The columns can be automatically parsed to a specific type by suffixing the column name in the CSV header with `::type`.
-Where `type` can be one of the following:
+
+Current, the following types are supported:
 
 - `bool`
 - `datetime`
@@ -30,7 +35,23 @@ Where `type` can be one of the following:
 - `int`
 - `string` (default)
 
-### Example
+## Use Cases
+
+### How to convert a CSV file
+
+1. **Drop your file** in the following folder:
+
+   `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
+  
+   > [!NOTE]
+   >
+   > - If the specified path does not exist, GQI will automatically creates it, allowing users to add the CSV file later.
+   > - File Reader will also detect the delimiter when none is specified, and supports adjusting the capitalization of table headers based on user-provided arguments, making it both flexible and user-friendly.
+
+1. **Run the corresponding script**, and File Reader will process your data instantly.  
+1. **Visualize, analyze, and integrate** the processed data into your system.  
+
+### Example of a CSV file
 
 ```CSV
 Timestamp::datetime,Test name,Test cases::int,Duration::double,Success::boolean
