@@ -10,7 +10,7 @@ This package contains a GQI data source that can read JSON files.
 
 1. **Drop your file** in the following folder:
 
-   `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile`
+   `C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile`
   
    > [!NOTE]
    > If the specified path does not exist, GQI will automatically create it, allowing users to add the JSON file later.

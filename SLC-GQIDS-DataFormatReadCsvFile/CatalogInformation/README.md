@@ -27,7 +27,7 @@ If no value is provided, the headers will retain their original capitalization a
 
 The columns can be automatically parsed to a specific type by suffixing the column name in the CSV header with `::type`.
 
-Current, the following types are supported:
+Currently, the following types are supported:
 
 - `bool`
 - `datetime`
@@ -41,7 +41,7 @@ Current, the following types are supported:
 
 1. **Drop your file** in the following folder:
 
-   `C:\Skyline DataMiner\Documents\DataMiner Catalog\DevOps\Ad-Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
+   `C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`
   
    > [!NOTE]
    >
