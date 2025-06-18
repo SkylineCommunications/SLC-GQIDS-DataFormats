@@ -102,6 +102,6 @@ Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
 
 For **technical details**, advanced configuration, and troubleshooting, see the **full documentation** for each script:
 
-- [CSV File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadCsvFile/CatalogInformation/README.md)
-- [JSON File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadJsonFile/CatalogInformation/README.md)
-- [XML File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadXmlFile/CatalogInformation/README.md)
+- [CSV File Reader](https://catalog.dataminer.services/details/2cebdc7f-4e9c-42f4-9cb8-65938062abc0)
+- [JSON File Reader](https://catalog.dataminer.services/details/b0c3e2ab-6827-43b4-9b25-1299cd1e97ae)
+- [XML File Reader](https://catalog.dataminer.services/details/a2e5d318-642a-4c05-b75a-177d0d5eb18b)
