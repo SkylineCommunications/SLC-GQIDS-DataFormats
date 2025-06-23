@@ -6,6 +6,9 @@ This package allows you to easily convert and visualize data from **CSV, JSON, a
 
 Whether you are an analyst, developer, or business user, this package will help you streamline your workflow and extract insights from raw data with minimal effort.
 
+> [!TIP]
+> Easily see how to implement a Dashboard/Low Code app with these scripts with our [Generic File Reader GQI Tutorial](https://catalog.dataminer.services/details/f7ecd365-7bf9-406d-978f-eaca9e3aa9c2).
+
 ## Key Features
 
 ### General features

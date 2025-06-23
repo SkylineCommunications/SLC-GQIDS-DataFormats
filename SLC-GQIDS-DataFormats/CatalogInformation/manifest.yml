@@ -55,8 +55,6 @@ documentation_url:
 #   The name is required; max 256 characters.
 #   The email and url are optional, and should be in valid email/URL formats.
 owners:
-  - name: Blake Smethers
-    email: blake.smethers@skyline.be
   - name: Carlos Matheus
     email: carlos.matheus@skyline.be
   - name: Sebastian Ulloa
@@ -66,4 +64,3 @@ tags:
   - CSV 
   - JSON
   - XML
-  - Automation

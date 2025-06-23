@@ -4,6 +4,9 @@
 
 This package contains a GQI data source that can read CSV files.
 
+> [!TIP]
+> Easily see how to implement a Dashboard/Low Code app with these scripts with our [Generic File Reader GQI Tutorial](https://catalog.dataminer.services/details/f7ecd365-7bf9-406d-978f-eaca9e3aa9c2).
+
 ## Key Features
 
 ### Smart delimiter detection

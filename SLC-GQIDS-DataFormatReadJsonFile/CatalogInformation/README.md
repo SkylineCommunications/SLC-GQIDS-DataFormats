@@ -4,6 +4,9 @@
 
 This package contains a GQI data source that can read JSON files.
 
+> [!TIP]
+> Easily see how to implement a Dashboard/Low Code app with these scripts with our [Generic File Reader GQI Tutorial](https://catalog.dataminer.services/details/f7ecd365-7bf9-406d-978f-eaca9e3aa9c2).
+
 ## Use Cases
 
 ### How to convert a JSON file
@@ -112,3 +115,4 @@ Every row contains an array of cells, and every cell consists of the following p
         }
     ]
 }
+```

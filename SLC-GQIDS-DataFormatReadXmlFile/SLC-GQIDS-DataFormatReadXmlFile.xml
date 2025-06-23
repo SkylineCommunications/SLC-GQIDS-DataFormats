@@ -5,7 +5,7 @@
 	<Type>Automation</Type>
 	<Author>GBO</Author>
 	<CheckSets>FALSE</CheckSets>
-	<Folder></Folder>
+	<Folder>DataMiner Catalog/Ad Hoc Data Sources</Folder>
 
 	<Protocols>
 	</Protocols>
