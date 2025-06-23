@@ -19,7 +19,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="System.Memory" Version="4.6.0" />
+		<PackageReference Include="System.Memory" Version="4.6.3" />
 	</ItemGroup>
 	<Import Project="..\GQIHelper\GQIHelper.projitems" Label="Shared" />
 </Project>
