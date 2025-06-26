@@ -1,5 +1,3 @@
-using Skyline.DataMiner.Net.ClusterStateTransition;
-
 namespace SLCGQIDSDataFormatReadCsvFile_1
 {
 	using System;
