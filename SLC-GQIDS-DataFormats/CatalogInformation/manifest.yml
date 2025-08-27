@@ -33,7 +33,7 @@ id: 0d9b64f3-81d0-46e6-bd3f-5fced5339103
 #   Max length: 100 characters.
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
-title: File Reader
+title: GQI Data Formats
 # [Optional]
 # General information about the Catalog item.
 #   Max length: 100,000 characters
