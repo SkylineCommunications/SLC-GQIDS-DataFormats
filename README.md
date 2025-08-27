@@ -1,42 +1,22 @@
-# File Reader
+# GQI Data Formats
 
 ## About
 
-This package allows you to easily convert and visualize data from **CSV, JSON, and XML files**.
+This package offers a versatile set of GQI scripts designed to simplify the handling and manipulation of various data sources. Whether you're looking to load data for tabular display or perform custom operations, these scripts provide a flexible and efficient solution to get you started.
 
 Whether you are an analyst, developer, or business user, this package will help you streamline your workflow and extract insights from raw data with minimal effort.
 
 ## Key Features
 
-### General features
+### File Reader Features
 
 - **Effortless data processing** – Simply place your file in the right folder, and let File Reader handle the rest. No complex setup required.
-- **Smart delimiter detection** – Automatically identifies delimiters in CSV files, ensuring smooth data imports.  
 - **Flexible type conversion** – Supports **bool, datetime, double, int, and string** formats for seamless data transformation.  
-- **Automated directory creation** – Missing the required folder? No worries. File Reader will create it for you.  
 - **Multi-format compatibility** – Works with CSV, JSON, and XML, making it the perfect all-in-one data processing solution.
-
-### CSV-related features
-
-- **Smart delimiter detection** – Identifies `,` `;` `\t` `|` automatically.  
-- **Header capitalization control** – Choose how headers should be formatted.  
-- **Type conversion** – Define column types using `::type` suffixes.
-- **Supports all common data types** - `bool`, `datetime`, `double`, `int`, `string` (default)
-
-### JSON-related features
-
-- **Column-based structure** – Define each column with `Name` and `Type`.
-- **Supports structured JSON** - For easy integration.
-- **Supports all common data types** - `bool`, `datetime`, `double`, `int`, `string`
-
-### XML-related features
-
-- **Structured data extraction** – Define columns and rows for seamless parsing.  
-- **Supports all common data types** - `bool`, `datetime`, `double`, `int`, `string`
 
 ## Use Cases
 
-### How to convert a CSV, JSON, or XML file
+### File Reader Use Case
 
 1. **Drop your file** in the designated folder:
 
@@ -47,61 +27,16 @@ Whether you are an analyst, developer, or business user, this package will help 
    | XML file  | `C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`  |
   
 1. **Run the corresponding script**, and File Reader will process your data instantly.  
-1. **Visualize, analyze, and integrate** the processed data into your system.  
+1. **Visualize, analyze, and integrate** the processed data into your system.
 
-### Example CSV format
-
-```csv
-Timestamp::datetime,Test Name,Test Cases::int,Duration::double,Success::boolean
-06/12/2023 01:00,Cisco CMTS,36,1081.788,false
-06/12/2023 01:21,Huawei 5600 5800,4,196.621,true
-```
-
-### Example JSON format
-
-```json
-{
-    "Columns": [
-        { "Name": "Order ID", "Type": "string" },
-        { "Name": "Created", "Type": "datetime" }
-    ],
-    "Rows": [
-        {
-            "Cells": [
-                { "Value": 149384 },
-                { "DisplayValue": "Nov 3, 2023", "Value": 1699009200000 }
-            ]
-        }
-    ]
-}
-```
-
-### Example XML format
-
-```xml
-<Data>
-    <Columns>
-        <Column>
-            <Name>Order ID</Name>
-            <Type>string</Type>
-        </Column>
-    </Columns>
-    <Rows>
-        <Row>
-            <Cells>
-                <Cell>
-                    <Value>149384</Value>
-                </Cell>
-            </Cells>
-        </Row>
-    </Rows>
-</Data>
-```
+> [!TIP]
+> Easily see how to implement a Dashboard/Low Code app with these scripts with our [Generic File Reader GQI Tutorial](https://catalog.dataminer.services/details/f7ecd365-7bf9-406d-978f-eaca9e3aa9c2).
 
 ## Technical Reference
 
 For **technical details**, advanced configuration, and troubleshooting, see the **full documentation** for each script:
 
-- [CSV File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadCsvFile/CatalogInformation/README.md)
-- [JSON File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadJsonFile/CatalogInformation/README.md)
-- [XML File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadXmlFile/CatalogInformation/README.md)
+- **File Reader Adhoc Scripts**
+    - [CSV File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadCsvFile/CatalogInformation/README.md)
+    - [JSON File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadJsonFile/CatalogInformation/README.md)
+    - [XML File Readme](https://github.com/SkylineCommunications/SLC-GQIDS-DataFormats/blob/master/SLC-GQIDS-DataFormatReadXmlFile/CatalogInformation/README.md)
