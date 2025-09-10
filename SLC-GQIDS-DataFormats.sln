@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLC-GQIDS-DataFormats", "SLC-GQIDS-DataFormats\SLC-GQIDS-DataFormats.csproj", "{31F2E346-24CE-418F-B868-D1F3C785DFA6}"
 EndProject
@@ -25,6 +25,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GQIHelper", "GQIHelper\GQIHelper.shproj", "{07F8F895-AA97-4148-98D8-598E7EBA8122}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLC-GQIDO-Divide", "SLC-GQIDO-Divide\SLC-GQIDO-Divide.csproj", "{DC70B748-E925-4CB3-9032-609F1CDA47C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{CA632995-B896-4119-B3A4-398C079BB64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA632995-B896-4119-B3A4-398C079BB64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA632995-B896-4119-B3A4-398C079BB64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC70B748-E925-4CB3-9032-609F1CDA47C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC70B748-E925-4CB3-9032-609F1CDA47C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC70B748-E925-4CB3-9032-609F1CDA47C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC70B748-E925-4CB3-9032-609F1CDA47C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
