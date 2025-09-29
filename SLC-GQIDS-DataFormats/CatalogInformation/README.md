@@ -21,6 +21,11 @@ Whether you are an analyst, developer, or business user, this package will help 
 - **Division by zero handling** – Automatically handles division by zero cases by returning NaN values.
 - **Custom column naming** – Define custom names for your calculated result columns.
 
+### Rename Column Operator Features
+- **Quick column renaming** – Easily rename any column in your dataset for better clarity and organization.
+- **User-friendly interface** – Simple configuration options to select the column to rename and specify the new name.
+- **Seamless integration** – Works seamlessly within any GQI query to enhance data presentation.
+
 ## Use Cases
 
 ### File Reader Use Case
@@ -36,15 +41,16 @@ Whether you are an analyst, developer, or business user, this package will help 
 1. **Run the corresponding script**, and File Reader will process your data instantly.  
 1. **Visualize, analyze, and integrate** the processed data into your system.
 
+> [!TIP]
+> Easily see how to implement a Dashboard/Low Code app with these scripts with our [Generic File Reader GQI Tutorial](https://catalog.dataminer.services/details/f7ecd365-7bf9-406d-978f-eaca9e3aa9c2).
+
+
 ### Divide Operator Use Case
 
 1. **Add the Divide operator** to any GQI query that contains numeric data columns.
 1. **Select your source columns** – Choose the dividend (first column) and divisor (second column).
 1. **Configure the operation** – Set an optional modifier and provide a name for the result column.
 1. **Execute the query** – The operator will calculate the division and add the result as a new column.
-
-> [!TIP]
-> Easily see how to implement a Dashboard/Low Code app with these scripts with our [Generic File Reader GQI Tutorial](https://catalog.dataminer.services/details/f7ecd365-7bf9-406d-978f-eaca9e3aa9c2).
 
 ## Technical Reference
 
@@ -57,3 +63,4 @@ For **technical details**, advanced configuration, and troubleshooting, see the 
 
 - **GQI Operators**
     - [Divide Operator](https://catalog.dataminer.services/details/7d2e8f3a-9b1c-4e5f-a6d7-1234567890ab)
+	- [Rename Column Operator](https://catalog.dataminer.services/details/9c24d711-1b71-4405-a5c2-2490f10f98a9)

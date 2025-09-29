@@ -1,0 +1,24 @@
+﻿<DMSScript options="272" xmlns="http://www.skyline.be/automation">
+	<Name>Rename Column</Name>
+	<Description />
+	<Type>Automation</Type>
+	<Author>SKYLINE2\Pieter</Author>
+	<CheckSets>FALSE</CheckSets>
+	<Folder>DataMiner Catalog/Operators</Folder>
+	<Protocols>
+	</Protocols>
+	<Memory>
+	</Memory>
+	<Parameters>
+	</Parameters>
+	<Script>
+		<Exe id="2" type="csharp">
+			<Value>
+				<![CDATA[[Project:Rename Column]]]>
+			</Value>
+			<Param type="preCompile">true</Param>
+			<Param type="libraryName">RenameOperator</Param>
+			<Message />
+		</Exe>
+	</Script>
+</DMSScript>
