@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Skyline.DataMiner.Sdk">
   <PropertyGroup>
-    <OutputType>Library</OutputType>
     <TargetFramework>net48</TargetFramework>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
