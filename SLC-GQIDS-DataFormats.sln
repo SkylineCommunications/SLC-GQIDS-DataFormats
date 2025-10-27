@@ -28,7 +28,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GQIHelper", "GQIHelper\GQIH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLC-GQIDO-Divide", "SLC-GQIDO-Divide\SLC-GQIDO-Divide.csproj", "{DC70B748-E925-4CB3-9032-609F1CDA47C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rename Column", "Rename Column\Rename Column.csproj", "{8A7031F0-7F87-77F9-60DE-04BCF3B21C35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLC-GQIDO-RenameColumn", "SLC-GQIDO-RenameColumn\SLC-GQIDO-RenameColumn.csproj", "{6D7C533E-F44B-4852-B79F-3611A7E08A4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,10 +60,10 @@ Global
 		{DC70B748-E925-4CB3-9032-609F1CDA47C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC70B748-E925-4CB3-9032-609F1CDA47C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC70B748-E925-4CB3-9032-609F1CDA47C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A7031F0-7F87-77F9-60DE-04BCF3B21C35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A7031F0-7F87-77F9-60DE-04BCF3B21C35}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A7031F0-7F87-77F9-60DE-04BCF3B21C35}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A7031F0-7F87-77F9-60DE-04BCF3B21C35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D7C533E-F44B-4852-B79F-3611A7E08A4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D7C533E-F44B-4852-B79F-3611A7E08A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D7C533E-F44B-4852-B79F-3611A7E08A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D7C533E-F44B-4852-B79F-3611A7E08A4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
