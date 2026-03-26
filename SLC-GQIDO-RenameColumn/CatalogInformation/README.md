@@ -8,9 +8,9 @@ This package contains a GQI operator that renames a specified column in your dat
 
 ### Quick Column Renaming
   
-- **Quick column renaming** – Easily rename any column in your dataset for better clarity and organization.
-- **User-friendly interface** – Simple configuration options to select the column to rename and specify the new name.
-- **Seamless integration** – Works seamlessly within any GQI query to enhance data presentation.
+- **Quick column renaming**: Easily rename any column in your dataset for better clarity and organization.
+- **User-friendly interface**: Rename a column by simply selecting it and specifying a new name.
+- **Seamless integration**: Works seamlessly within any GQI query to enhance data presentation.
 
 ## Use Cases
 
@@ -18,8 +18,9 @@ This package contains a GQI operator that renames a specified column in your dat
 
 1. **Add the operator** to any GQI query that contains columns.
 
-2. **Configure the parameters**:
-   - **Column** (required): Select the column that you would like to rename
-   - **New name** (required): The new column name you would like to display, replacing the previously selected name.
+1. **Configure the parameters**:
 
-3. **Execute the query** – The operator will calculate the division and add the result as a new column.
+   - **Column** (required): Select the column that you would like to rename.
+   - **New name** (required): Enter the new column name you would like to display, replacing the previously selected name.
+
+1. **Execute the query**: The operator will rename the column.

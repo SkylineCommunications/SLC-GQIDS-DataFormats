@@ -2,7 +2,7 @@
 
 ## About
 
-This package offers a versatile set of GQI scripts designed to simplify the handling and manipulation of various data sources. Whether you're looking to load data for tabular display or perform custom operations, these scripts provide a flexible and efficient solution to get you started.
+This package contains a versatile set of GQI scripts designed to simplify the handling and manipulation of various data sources. Whether you are looking to load data for tabular display or perform custom operations, these scripts provide a flexible and efficient solution to get you started.
 
 Whether you are an analyst, developer, or business user, this package will help you streamline your workflow and extract insights from raw data with minimal effort.
 
@@ -22,8 +22,9 @@ Whether you are an analyst, developer, or business user, this package will help 
 - **Custom column naming** – Define custom names for your calculated result columns.
 
 ### Rename Column Operator Features
+
 - **Quick column renaming** – Easily rename any column in your dataset for better clarity and organization.
-- **User-friendly interface** – Simple configuration options to select the column to rename and specify the new name.
+- **User-friendly interface** – Rename a column simply by selecting it and specifying the new name.
 - **Seamless integration** – Works seamlessly within any GQI query to enhance data presentation.
 
 ## Use Cases
@@ -33,7 +34,7 @@ Whether you are an analyst, developer, or business user, this package will help 
 1. **Drop your file** in the designated folder:
 
    | File | Folder |
-   |------|--------|
+   | ---- | ------ |
    | CSV file  | `C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadCsvFile`  |
    | JSON file | `C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadJsonFile` |
    | XML file  | `C:\Skyline DataMiner\Documents\Ad Hoc Data Sources\SLC-GQIDS-DataFormatReadXmlFile`  |
@@ -42,8 +43,7 @@ Whether you are an analyst, developer, or business user, this package will help 
 1. **Visualize, analyze, and integrate** the processed data into your system.
 
 > [!TIP]
-> Easily see how to implement a Dashboard/Low Code app with these scripts with our [Generic File Reader GQI Tutorial](https://catalog.dataminer.services/details/f7ecd365-7bf9-406d-978f-eaca9e3aa9c2).
-
+> For instructions on how to implement these scripts in a dashboard or a low-code app, see [File Reader GQI Tutorial](https://catalog.dataminer.services/details/f7ecd365-7bf9-406d-978f-eaca9e3aa9c2).
 
 ### Divide Operator Use Case
 
@@ -54,13 +54,15 @@ Whether you are an analyst, developer, or business user, this package will help 
 
 ## Technical Reference
 
-For **technical details**, advanced configuration, and troubleshooting, see the **full documentation** for each script:
+For **technical details**, advanced configuration, and troubleshooting, see the **full documentation** of each script:
 
-- **File Reader Adhoc Scripts**
-    - [CSV File Reader](https://catalog.dataminer.services/details/2cebdc7f-4e9c-42f4-9cb8-65938062abc0)
-    - [JSON File Reader](https://catalog.dataminer.services/details/b0c3e2ab-6827-43b4-9b25-1299cd1e97ae)
-    - [XML File Reader](https://catalog.dataminer.services/details/a2e5d318-642a-4c05-b75a-177d0d5eb18b)
+- **File Reader Ad Hoc Scripts**
+
+  - [CSV File Reader](https://catalog.dataminer.services/details/2cebdc7f-4e9c-42f4-9cb8-65938062abc0)
+  - [JSON File Reader](https://catalog.dataminer.services/details/b0c3e2ab-6827-43b4-9b25-1299cd1e97ae)
+  - [XML File Reader](https://catalog.dataminer.services/details/a2e5d318-642a-4c05-b75a-177d0d5eb18b)
 
 - **GQI Operators**
-    - [Divide Operator](https://catalog.dataminer.services/details/7d2e8f3a-9b1c-4e5f-a6d7-1234567890ab)
-	- [Rename Column Operator](https://catalog.dataminer.services/details/9c24d711-1b71-4405-a5c2-2490f10f98a9)
+
+  - [Divide Operator](https://catalog.dataminer.services/details/7d2e8f3a-9b1c-4e5f-a6d7-1234567890ab)
+  - [Rename Column Operator](https://catalog.dataminer.services/details/9c24d711-1b71-4405-a5c2-2490f10f98a9)
